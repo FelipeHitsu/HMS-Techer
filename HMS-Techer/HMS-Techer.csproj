@@ -6,4 +6,8 @@
     <RootNamespace>HMS_Techer</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Dados\" />
+  </ItemGroup>
+
 </Project>
