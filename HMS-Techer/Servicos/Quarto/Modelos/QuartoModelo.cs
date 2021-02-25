@@ -14,7 +14,8 @@ namespace HMS_Techer.Servicos.Quarto
 
         public override string ToString()
         {
-            return "Numero do Quarto: "
+            return System.Environment.NewLine 
+                +"Numero do Quarto: "
                 + QuartoId
                 + System.Environment.NewLine
                 + "Tipo: "

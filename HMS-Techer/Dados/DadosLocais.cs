@@ -11,13 +11,11 @@ namespace HMS_Techer.Dados
 
         public static List<Quarto> Quartos = new List<Quarto>();
 
-        public static List<Reserva> Reservas = new List<Reserva>;
+        public static List<Reserva> Reservas = new List<Reserva>();
 
-        private string ArquivoClientes = "";
-
-        private string ArquivoQuartos = "";
-
-        public string Arquivo { get; private set; } = ""; 
+        public string ArquivoClientes { get; private set; } = "";
+        public string ArquivoQuartos { get; private set; } = "";
+        public string ArquivoReservas { get; private set; } = ""; 
        
     }
 }

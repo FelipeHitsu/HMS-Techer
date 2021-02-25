@@ -17,7 +17,7 @@ namespace HMS_Techer.Servicos.Quarto
                 Situacao = new SituacaoQuarto { SituacaoId = 1,Descricao = "Livre"}
             });
         }
-        private static void BuscarQuarto(int quartoId)
+        public static void BuscarQuarto(int quartoId)
         {
             Entidades.Quarto quartoBusca = DadosLocais.Quartos.Find(a => a.QuartoId == quartoId);
             if (quartoBusca != null) {
@@ -32,6 +32,44 @@ namespace HMS_Techer.Servicos.Quarto
             else
                 Console.WriteLine("Quarto invalido!");
         }
+        public static void ListarQuartos()
+        {
+            List<QuartoModelo> quartosModelo = new List<QuartoModelo>();
+            foreach (Entidades.Quarto quarto in DadosLocais.Quartos)
+            {
+                quartosModelo.Add(new QuartoModelo
+                {
+                    QuartoId = quarto.QuartoId,
+                    Tipo = quarto.Tipo,
+                    Situacao = quarto.Situacao
+                });
+            }
+
+            foreach(QuartoModelo quartoModelo in quartosModelo)
+                Console.WriteLine(quartoModelo);
+           
+        }
+
+        public static void ListarQuartosPorSituacao(SituacaoQuarto situacao)
+        {
+            List<QuartoModelo> quartosModelo = new List<QuartoModelo>();
+            foreach (Entidades.Quarto quarto in DadosLocais.Quartos)
+            {
+                if (quarto.Situacao == situacao)
+                {
+                    quartosModelo.Add(new QuartoModelo
+                    {
+                        QuartoId = quarto.QuartoId,
+                        Tipo = quarto.Tipo,
+                        Situacao = quarto.Situacao
+                    });
+                }
+            }
+
+            foreach (QuartoModelo quartoModelo in quartosModelo)
+                Console.WriteLine(quartoModelo);
+        }
+
         public static void AlterarSituacao(int quartoId, SituacaoQuarto situacaoQuarto)
         {
             DadosLocais.Quartos.Find(a => a.QuartoId == quartoId).Situacao = situacaoQuarto;

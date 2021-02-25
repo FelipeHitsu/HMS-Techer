@@ -14,7 +14,8 @@ namespace HMS_Techer.Servicos.Cliente.Modelos
 
         public override string ToString()
         {
-            return "Nome Completo: "
+            return System.Environment.NewLine
+                + "Nome Completo: "
                 + NomeCompleto
                 + System.Environment.NewLine
                 + "Idade: "
@@ -26,7 +27,7 @@ namespace HMS_Techer.Servicos.Cliente.Modelos
                 + System.Environment.NewLine
                 + "Telefone Celular: "
                 + TelefoneCelular
-                + System.Environment.NewLine
+                + System.Environment.NewLine;
         }
     }
 }

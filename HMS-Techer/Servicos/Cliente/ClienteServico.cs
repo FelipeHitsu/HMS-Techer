@@ -35,7 +35,7 @@ namespace HMS_Techer.Servicos.Cliente
                     Email = clienteBusca.Email,
                     TelefoneCelular = clienteBusca.TelefoneCelular
                 };
-                Console.WriteLine("Cliente ja cadastrado: " + System.Environment.NewLine + clienteModelo.ToString());
+                Console.WriteLine("Cliente ja cadastrado: " + clienteModelo.ToString());
             }
             else
                 Console.WriteLine("Cliente não cadastrado");

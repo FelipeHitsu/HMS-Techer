@@ -12,6 +12,5 @@ namespace HMS_Techer.Entidades
         public string Email { get; set; }
         public string TelefoneCelular { get; set; }
         public DateTime DataCriacao { get; set; }
-
     }
 }
