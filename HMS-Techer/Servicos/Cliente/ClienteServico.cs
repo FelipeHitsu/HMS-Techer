@@ -8,8 +8,9 @@ namespace HMS_Techer.Servicos.Cliente
 {
     class ClienteServico
     {
-        public static void CadastrarCliente(ClienteFormularioModelo clienteFormularioModelo)
+        public static void CadastrarCliente(ClienteFormularioModelo clienteFormularioModelo)//model
         {
+            clienteFormularioModelo.Validar();
             Dados.DadosLocais.ClienteCadastrados.Add(new Entidades.Cliente
             {
                 Cpf = clienteFormularioModelo.Cpf,
@@ -21,24 +22,44 @@ namespace HMS_Techer.Servicos.Cliente
             });
         }
 
-        public static void BuscarCliente(string cpf)
+        public static void MostrarCliente(string cpf)
         {
+            //Usar var
             Entidades.Cliente clienteBusca = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == cpf);
+
+            ClienteModelo clienteModelo = new ClienteModelo
+            {
+                NomeCompleto = clienteBusca.NomeCompleto,
+                DataNascimento = clienteBusca.DataNascimento,
+                Idade = DateTime.Now.Year - clienteBusca.DataNascimento.Year,
+                Email = clienteBusca.Email,
+                TelefoneCelular = clienteBusca.TelefoneCelular
+            };
 
             if (clienteBusca != null)
             {
-                ClienteModelo clienteModelo = new ClienteModelo
-                {
-                    NomeCompleto = clienteBusca.NomeCompleto,
-                    DataNascimento = clienteBusca.DataNascimento,
-                    Idade = DateTime.Now.Year - clienteBusca.DataNascimento.Year,
-                    Email = clienteBusca.Email,
-                    TelefoneCelular = clienteBusca.TelefoneCelular
-                };
-                Console.WriteLine("Cliente ja cadastrado: " + clienteModelo.ToString());
+                Console.WriteLine(clienteBusca.ToString());
             }
             else
                 Console.WriteLine("Cliente não cadastrado");
+        }
+
+        public static ClienteFormularioModelo BuscarCliente(string cpf)
+        {
+            Entidades.Cliente clienteBusca = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == cpf);
+
+            ClienteFormularioModelo clienteFormularioModelo = new ClienteFormularioModelo
+            {
+                NomeCompleto = clienteBusca.NomeCompleto,
+                DataNascimento = clienteBusca.DataNascimento,
+                Cpf = clienteBusca.Cpf,
+                Email = clienteBusca.Email,
+                TelefoneCelular = clienteBusca.TelefoneCelular
+            };
+
+            return clienteFormularioModelo;
+
+
         }
     }
 }

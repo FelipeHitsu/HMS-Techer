@@ -9,7 +9,7 @@ namespace HMS_Techer.Entidades
         /*
          * 1 - Desocupado / Livre
          * 2 - Ocupado
-         * 3 - Em Limpeza
+         * 3 - Reservado
          * 4 - Em Manutenção
          */
         public int SituacaoId { get; set; }

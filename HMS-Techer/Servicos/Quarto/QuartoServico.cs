@@ -17,17 +17,23 @@ namespace HMS_Techer.Servicos.Quarto
                 Situacao = new SituacaoQuarto { SituacaoId = 1,Descricao = "Livre"}
             });
         }
-        public static void BuscarQuarto(int quartoId)
+        public static QuartoModelo BuscarQuarto(int quartoId)
         {
             Entidades.Quarto quartoBusca = DadosLocais.Quartos.Find(a => a.QuartoId == quartoId);
-            if (quartoBusca != null) {
-                QuartoModelo quartoModelo = new QuartoModelo
-                {
-                    QuartoId = quartoBusca.QuartoId,
-                    Tipo = quartoBusca.Tipo,
-                    Situacao = quartoBusca.Situacao
-                };
-                Console.WriteLine(System.Environment.NewLine + quartoModelo);
+            QuartoModelo quartoModelo = new QuartoModelo
+            {
+                QuartoId = quartoBusca.QuartoId,
+                Tipo = quartoBusca.Tipo,
+                Situacao = quartoBusca.Situacao
+            };
+            return quartoModelo;
+        }
+        public static void MostrarQuarto(int quartoId)
+        {
+            QuartoModelo quartoBusca = BuscarQuarto(quartoId);
+            if (quartoBusca != null)
+            {
+                Console.WriteLine(System.Environment.NewLine + quartoBusca);
             }
             else
                 Console.WriteLine("Quarto invalido!");
