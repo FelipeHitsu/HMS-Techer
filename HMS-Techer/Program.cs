@@ -29,6 +29,12 @@ namespace HMS_Techer
             Dados.DadosServico.CarregarDados();
             Servicos.Cliente.ClienteServico.ListarTodosOsClientes();
 
+            //Servicos.Quarto.QuartoServico.PrimeiraInstanciaQuartos();
+
+            Servicos.Quarto.QuartoServico.ListarQuartos();
+
+            // Dados.DadosServico.SalvarTodosOsDados();
+
             //Servicos.Cliente.ClienteServico.MostrarCliente("00000000001");
 
             Console.ReadLine();

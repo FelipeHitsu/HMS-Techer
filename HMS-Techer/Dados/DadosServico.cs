@@ -38,6 +38,23 @@ namespace HMS_Techer.Dados
 
                 }
 
+                using (StreamReader sr = File.OpenText(DadosLocais.ArquivoClientes))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        string[] dadosLidos = line.Split(',');
+
+                        DadosLocais.Quartos.Add(new Entidades.Quarto
+                        {
+                            QuartoId = dadosLidos[0],
+                            Situacao = dadosLidos[1],
+                            Tipo = DateTime.Parse(dadosLidos[2]),
+                        });
+                    }
+
+                }
+
             }
             catch (IOException e)
             {
@@ -50,6 +67,7 @@ namespace HMS_Techer.Dados
         {
             try
             {
+
                 File.WriteAllText(DadosLocais.ArquivoClientes, string.Empty);
                 using (StreamWriter sw = File.AppendText(DadosLocais.ArquivoClientes))
                 {
@@ -71,6 +89,18 @@ namespace HMS_Techer.Dados
 
                     }
                 }
+
+                File.WriteAllText(DadosLocais.ArquivoClientes, string.Empty);
+                using (StreamWriter sw = File.AppendText(DadosLocais.ArquivoQuartos))
+                {
+                    foreach (Entidades.Quarto quarto in DadosLocais.Quartos)
+                    {
+                        sw.WriteLine(quarto.QuartoId + "," + quarto.Tipo.TipoId + "," + quarto.Situacao.SituacaoId);
+                    }
+
+                }
+
+
             }
             catch (IOException e)
             {

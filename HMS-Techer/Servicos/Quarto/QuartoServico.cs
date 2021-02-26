@@ -14,7 +14,7 @@ namespace HMS_Techer.Servicos.Quarto
             {
                 QuartoId = modeloQuarto.QuartoId,
                 Tipo = modeloQuarto.Tipo,
-                Situacao = new SituacaoQuarto { SituacaoId = 1,Descricao = "Livre"}
+                Situacao = new SituacaoQuarto { SituacaoId = 1, Descricao = "Livre" }
             });
         }
         public static QuartoModelo BuscarQuarto(int quartoId)
@@ -51,9 +51,8 @@ namespace HMS_Techer.Servicos.Quarto
                 });
             }
 
-            foreach(QuartoModelo quartoModelo in quartosModelo)
+            foreach (QuartoModelo quartoModelo in quartosModelo)
                 Console.WriteLine(quartoModelo);
-           
         }
 
         public static void ListarQuartosPorSituacao(SituacaoQuarto situacao)
@@ -76,11 +75,83 @@ namespace HMS_Techer.Servicos.Quarto
                 Console.WriteLine(quartoModelo);
         }
 
+        public static SituacaoQuarto ParseSituacao(int id)
+        {
+
+        }
+
+        public static TipoQuarto ParseTipoQuarto(int id)
+        {
+
+        }
+
         public static void AlterarSituacao(int quartoId, SituacaoQuarto situacaoQuarto)
         {
             DadosLocais.Quartos.Find(a => a.QuartoId == quartoId).Situacao = situacaoQuarto;
         }
 
+        public static void PrimeiraInstanciaQuartos()
+        {
+            //Instancia inicial dos quartos solteiro
+            for (int i = 1; i <= 20; i++)
+            {
+                DadosLocais.Quartos.Add(new Entidades.Quarto
+                {
+                    QuartoId = i,
+                    Situacao = new SituacaoQuarto
+                    {
+                        SituacaoId = 1,
+                        Descricao = "Livre"
+                    },
+                    Tipo = new TipoQuarto
+                    {
+                        TipoId = 1,
+                        Descricao = "Solteiro",
+                        Valor = 150
+                    }
+                });
+            }
+
+            //Instancia incial quartos duplos
+            for (int i = 21; i <= 30; i++)
+            {
+                DadosLocais.Quartos.Add(new Entidades.Quarto
+                {
+                    QuartoId = i,
+                    Situacao = new SituacaoQuarto
+                    {
+                        SituacaoId = 1,
+                        Descricao = "Livre"
+                    },
+                    Tipo = new TipoQuarto
+                    {
+                        TipoId = 2,
+                        Descricao = "Duplo",
+                        Valor = 200
+                    }
+                });
+            }
+
+            //Instancia incial quartos Casal
+            for (int i = 31; i <= 50; i++)
+            {
+                DadosLocais.Quartos.Add(new Entidades.Quarto
+                {
+                    QuartoId = i,
+                    Situacao = new SituacaoQuarto
+                    {
+                        SituacaoId = 1,
+                        Descricao = "Livre"
+                    },
+                    Tipo = new TipoQuarto
+                    {
+                        TipoId = 3,
+                        Descricao = "Casal",
+                        Valor = 250
+                    }
+                });
+            }
+        }
 
     }
 }
