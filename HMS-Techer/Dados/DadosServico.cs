@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using HMS_Techer.Servicos.Cliente.Modelos;
@@ -49,11 +50,41 @@ namespace HMS_Techer.Dados
                         DadosLocais.Quartos.Add(new Entidades.Quarto
                         {
                             QuartoId = int.Parse(dadosLidos[0]),
-                            Tipo =  Servicos.Quarto.QuartoServico.ParseTipoQuarto(int.Parse(dadosLidos[1])),
+                            Tipo = Servicos.Quarto.QuartoServico.ParseTipoQuarto(int.Parse(dadosLidos[1])),
                             Situacao = Servicos.Quarto.QuartoServico.ParseSituacao(int.Parse(dadosLidos[2])),
                         });
                     }
 
+                }
+
+                using(StreamReader sr = File.OpenText(DadosLocais.ArquivoReservas))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        string[] dadosLidos = line.Split(',');
+                        string[] HospedeCpfTestes = dadosLidos[5].Split('/');
+
+                        if (String.IsNullOrEmpty(HospedeCpfTestes[1]))
+                        {
+                            DadosLocais.Reservas.Add(
+                                new Entidades.Reserva
+                                {
+                                    ReservaId = int.Parse(dadosLidos[0]),
+                                    DataCriacao = DateTime.Parse(dadosLidos[1]),
+                                    DataCheckIn = DateTime.Parse(dadosLidos[2]),
+                                    DataCheckOut = DateTime.Parse(dadosLidos[3]),
+                                    Cliente = Servicos.Cliente.ClienteServico.BuscarCliente(dadosLidos[4]),
+
+                                }
+                                );
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
                 }
 
             }
@@ -68,7 +99,7 @@ namespace HMS_Techer.Dados
         {
             try
             {
-
+                //Escrever Clientes no CSV
                 File.WriteAllText(DadosLocais.ArquivoClientes, string.Empty);
                 using (StreamWriter sw = File.AppendText(DadosLocais.ArquivoClientes))
                 {
@@ -90,8 +121,8 @@ namespace HMS_Techer.Dados
 
                     }
                 }
-
-                File.WriteAllText(DadosLocais.ArquivoClientes, string.Empty);
+                //Escrever Quartos no CSV
+                File.WriteAllText(DadosLocais.ArquivoQuartos, string.Empty);
                 using (StreamWriter sw = File.AppendText(DadosLocais.ArquivoQuartos))
                 {
                     foreach (Entidades.Quarto quarto in DadosLocais.Quartos)
@@ -100,7 +131,38 @@ namespace HMS_Techer.Dados
                     }
 
                 }
+                //Escrever Reservas no CSV
+                File.WriteAllText(DadosLocais.ArquivoReservas, string.Empty);
+                using (StreamWriter sw = File.AppendText(DadosLocais.ArquivoReservas))
+                {
+                    foreach (Entidades.Reserva reserva in DadosLocais.Reservas)
+                    {
+                        sw.WriteLine(
+                            reserva.ReservaId
+                            + ","
+                            + reserva.DataCriacao.ToString()
+                            + ","
+                            + reserva.DataCheckIn.ToString()
+                            + ","
+                            + reserva.DataCheckOut.ToString()
+                            + ","
+                            + reserva.Cliente.Cpf
+                            + ","
+                            + reserva.HospedesJSON
+                            + ","
+                            + reserva.Quarto.QuartoId
+                            + ","
+                            + reserva.Quarto.Situacao.SituacaoId
+                            + ","
+                            + reserva.ValorDiarias.ToString("F2", CultureInfo.InvariantCulture)
+                            + ","
+                            + reserva.TaxasConsumo.ToString("F2", CultureInfo.InvariantCulture)
+                            + ","
+                            + reserva.ValorFinal.ToString("F2", CultureInfo.InvariantCulture)
+                            );
+                    }
 
+                }
 
             }
             catch (IOException e)

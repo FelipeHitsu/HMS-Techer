@@ -31,11 +31,18 @@ namespace HMS_Techer
 
             //Servicos.Quarto.QuartoServico.PrimeiraInstanciaQuartos();
 
-            Servicos.Quarto.QuartoServico.ListarQuartos();
+            //Servicos.Quarto.QuartoServico.ListarQuartos();
 
             // Dados.DadosServico.SalvarTodosOsDados();
 
             //Servicos.Cliente.ClienteServico.MostrarCliente("00000000001");
+
+            Servicos.Reserva.ReservaServico.CriarNovaReserva(new Servicos.Reserva.Modelos.ReservaFormularioModelo { ClienteCpf = "00000000001", QuartoNumero = 35 });
+            Servicos.Reserva.ReservaServico.CriarNovaReserva(new Servicos.Reserva.Modelos.ReservaFormularioModelo { ClienteCpf = "00000000002", QuartoNumero = 10 });
+            Servicos.Reserva.ReservaServico.FazerCheckIn(1, "00000000001");
+            Servicos.Reserva.ReservaServico.FazerCheckOut(1, 150);
+            Console.WriteLine(Dados.DadosLocais.Reservas.Count);
+            Servicos.Reserva.ReservaServico.ListarTodasAsReservas();
 
             Console.ReadLine();
         }

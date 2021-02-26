@@ -11,7 +11,7 @@ namespace HMS_Techer.Entidades
         public DateTime DataCheckIn { get; set; }
         public DateTime DataCheckOut { get; set; }
         public Servicos.Cliente.Modelos.ClienteFormularioModelo Cliente { get; set; }
-        public List<Entidades.Cliente> Hospedes { get; set; }
+        public List<Entidades.Cliente> Hospedes { get; set; } = new List<Cliente>(); 
         public string HospedesJSON { get; set; }
         public Servicos.Quarto.QuartoModelo Quarto { get; set; }
         public double ValorDiarias { get; set; }
