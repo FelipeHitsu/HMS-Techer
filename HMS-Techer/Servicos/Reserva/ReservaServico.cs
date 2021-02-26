@@ -16,13 +16,13 @@ namespace HMS_Techer.Servicos.Reserva
                 Cliente = Cliente.ClienteServico.BuscarCliente(reservaFormularioModelo.ClienteCpf),
                 Quarto = Quarto.QuartoServico.BuscarQuarto(reservaFormularioModelo.QuartoNumero)
             });
-            Dados.DadosLocais.Quartos.ForEach(q => 
-            { 
-                if(q.QuartoId == reservaFormularioModelo.QuartoNumero)
+            Dados.DadosLocais.Quartos.ForEach(q =>
+            {
+                if (q.QuartoId == reservaFormularioModelo.QuartoNumero)
                 {
                     q.Situacao.SituacaoId = 3;
                     q.Situacao.Descricao = "Reservado";
-                }            
+                }
             });
             //Quarto.QuartoServico.AlterarSituacao(reservaFormularioModelo.QuartoNumero, new Entidades.SituacaoQuarto { SituacaoId = 3, Descricao = "Reservado" });
         }
@@ -79,7 +79,7 @@ namespace HMS_Techer.Servicos.Reserva
             }
         }
 
-        public static void FazerCheckOut(int reservaId,double consumoETaxas)
+        public static void FazerCheckOut(int reservaId, double consumoETaxas)
         {
             var reserva = Dados.DadosLocais.Reservas.Find(a => a.ReservaId == reservaId);
             reserva.DataCheckOut = DateTime.Now;
@@ -92,7 +92,7 @@ namespace HMS_Techer.Servicos.Reserva
 
         public static void ListarTodasAsReservas()
         {
-            foreach(Entidades.Reserva reserva in Dados.DadosLocais.Reservas)
+            foreach (Entidades.Reserva reserva in Dados.DadosLocais.Reservas)
             {
                 var reservaModelo = new Reserva.Modelos.ReservaFinalModelo
                 {
@@ -109,6 +109,26 @@ namespace HMS_Techer.Servicos.Reserva
                 };
 
                 Console.WriteLine(reservaModelo);
+            }
+        }
+
+        public static void InicializaReservas()
+        {
+            foreach (Entidades.Reserva reserva in Dados.DadosLocais.Reservas)
+            {
+                string[] cpfHospedes = reserva.HospedesJSON.Split('/');
+                if (String.IsNullOrEmpty(cpfHospedes[1]))
+                {
+                    reserva.Hospedes.Add(Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == cpfHospedes[0]));
+                }
+                else
+                {
+                    var hospede1 = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == cpfHospedes[0]);
+                    var hospede2 = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == cpfHospedes[1]);
+                    reserva.Hospedes.Add(hospede1);
+                    reserva.Hospedes.Add(hospede2);
+                }
+                reserva.Quarto.Situacao = Servicos.Quarto.QuartoServico.ParseSituacao(reserva.QuartoSituacaoID);
             }
         }
     }

@@ -57,17 +57,15 @@ namespace HMS_Techer.Dados
 
                 }
 
-                using(StreamReader sr = File.OpenText(DadosLocais.ArquivoReservas))
+                using (StreamReader sr = File.OpenText(DadosLocais.ArquivoReservas))
                 {
                     while (!sr.EndOfStream)
                     {
                         string line = sr.ReadLine();
                         string[] dadosLidos = line.Split(',');
-                        string[] HospedeCpfTestes = dadosLidos[5].Split('/');
+                        //string[] HospedeCpfTestes = dadosLidos[5].Split('/');
 
-                        if (String.IsNullOrEmpty(HospedeCpfTestes[1]))
-                        {
-                            DadosLocais.Reservas.Add(
+                        DadosLocais.Reservas.Add(
                                 new Entidades.Reserva
                                 {
                                     ReservaId = int.Parse(dadosLidos[0]),
@@ -75,15 +73,14 @@ namespace HMS_Techer.Dados
                                     DataCheckIn = DateTime.Parse(dadosLidos[2]),
                                     DataCheckOut = DateTime.Parse(dadosLidos[3]),
                                     Cliente = Servicos.Cliente.ClienteServico.BuscarCliente(dadosLidos[4]),
-
+                                    HospedesJSON = dadosLidos[5],
+                                    Quarto = Servicos.Quarto.QuartoServico.BuscarQuarto(int.Parse(dadosLidos[6])),
+                                    QuartoSituacaoID = int.Parse(dadosLidos[7]),
+                                    ValorDiarias = double.Parse(dadosLidos[8],CultureInfo.InvariantCulture),
+                                    TaxasConsumo = double.Parse(dadosLidos[9], CultureInfo.InvariantCulture),
+                                    ValorFinal = double.Parse(dadosLidos[10], CultureInfo.InvariantCulture)
                                 }
                                 );
-                        }
-                        else
-                        {
-
-                        }
-
                     }
                 }
 

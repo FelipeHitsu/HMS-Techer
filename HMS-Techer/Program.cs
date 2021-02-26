@@ -27,7 +27,7 @@ namespace HMS_Techer
             Dados.DadosServico.SalvarTodosOsDados();*/
 
             Dados.DadosServico.CarregarDados();
-            Servicos.Cliente.ClienteServico.ListarTodosOsClientes();
+            //Servicos.Cliente.ClienteServico.ListarTodosOsClientes();
 
             //Servicos.Quarto.QuartoServico.PrimeiraInstanciaQuartos();
 
@@ -37,12 +37,13 @@ namespace HMS_Techer
 
             //Servicos.Cliente.ClienteServico.MostrarCliente("00000000001");
 
-            Servicos.Reserva.ReservaServico.CriarNovaReserva(new Servicos.Reserva.Modelos.ReservaFormularioModelo { ClienteCpf = "00000000001", QuartoNumero = 35 });
-            Servicos.Reserva.ReservaServico.CriarNovaReserva(new Servicos.Reserva.Modelos.ReservaFormularioModelo { ClienteCpf = "00000000002", QuartoNumero = 10 });
-            Servicos.Reserva.ReservaServico.FazerCheckIn(1, "00000000001");
-            Servicos.Reserva.ReservaServico.FazerCheckOut(1, 150);
+            // Servicos.Reserva.ReservaServico.CriarNovaReserva(new Servicos.Reserva.Modelos.ReservaFormularioModelo { ClienteCpf = "00000000001", QuartoNumero = 35 });
+            // Servicos.Reserva.ReservaServico.CriarNovaReserva(new Servicos.Reserva.Modelos.ReservaFormularioModelo { ClienteCpf = "00000000002", QuartoNumero = 10 });
+            //Servicos.Reserva.ReservaServico.FazerCheckIn(1, "00000000001");
+            // Servicos.Reserva.ReservaServico.FazerCheckOut(1, 150);
             Console.WriteLine(Dados.DadosLocais.Reservas.Count);
             Servicos.Reserva.ReservaServico.ListarTodasAsReservas();
+            Dados.DadosServico.SalvarTodosOsDados();
 
             Console.ReadLine();
         }

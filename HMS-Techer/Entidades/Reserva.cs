@@ -14,6 +14,7 @@ namespace HMS_Techer.Entidades
         public List<Entidades.Cliente> Hospedes { get; set; } = new List<Cliente>(); 
         public string HospedesJSON { get; set; }
         public Servicos.Quarto.QuartoModelo Quarto { get; set; }
+        public int QuartoSituacaoID { get; set; }
         public double ValorDiarias { get; set; }
         public double TaxasConsumo { get; set; }
         public double ValorFinal { get; set; }
