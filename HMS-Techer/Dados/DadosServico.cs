@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using HMS_Techer.Servicos.Cliente.Modelos;
+using HMS_Techer.Servicos;
 
 namespace HMS_Techer.Dados
 {
@@ -38,7 +39,7 @@ namespace HMS_Techer.Dados
 
                 }
 
-                using (StreamReader sr = File.OpenText(DadosLocais.ArquivoClientes))
+                using (StreamReader sr = File.OpenText(DadosLocais.ArquivoQuartos))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -47,9 +48,9 @@ namespace HMS_Techer.Dados
 
                         DadosLocais.Quartos.Add(new Entidades.Quarto
                         {
-                            QuartoId = dadosLidos[0],
-                            Situacao = dadosLidos[1],
-                            Tipo = DateTime.Parse(dadosLidos[2]),
+                            QuartoId = int.Parse(dadosLidos[0]),
+                            Tipo =  Servicos.Quarto.QuartoServico.ParseTipoQuarto(int.Parse(dadosLidos[1])),
+                            Situacao = Servicos.Quarto.QuartoServico.ParseSituacao(int.Parse(dadosLidos[2])),
                         });
                     }
 

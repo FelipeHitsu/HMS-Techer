@@ -77,12 +77,47 @@ namespace HMS_Techer.Servicos.Quarto
 
         public static SituacaoQuarto ParseSituacao(int id)
         {
+            string descricao = "";
 
+            if (id == 1)
+                descricao = "Livre";
+
+            if (id == 2)
+                descricao = "Ocupado";
+
+            if (id == 3)
+                descricao = "Reservado";
+
+            if(id == 4)
+                descricao = "Em Manutenção";
+
+            return new SituacaoQuarto { SituacaoId = id, Descricao = descricao };
         }
 
         public static TipoQuarto ParseTipoQuarto(int id)
         {
+            string descricao = "";
+            double valor = 0;
 
+            if(id == 1)
+            {
+                descricao = "Solteiro";
+                valor = 150;
+            }
+
+            if (id == 2)
+            {
+                descricao = "Duplo";
+                valor = 200;
+            }
+
+            if(id == 3)
+            {
+                descricao = "Casal";
+                valor = 250;
+            }
+
+            return new TipoQuarto { TipoId = id, Descricao = descricao, Valor = valor };
         }
 
         public static void AlterarSituacao(int quartoId, SituacaoQuarto situacaoQuarto)
