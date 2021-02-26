@@ -15,7 +15,21 @@ namespace HMS_Techer
             Views.Tela.Carregar();
             Console.WriteLine("OK");*/
 
+            /*Servicos.Cliente.ClienteServico.CadastrarCliente(new Servicos.Cliente.Modelos.ClienteFormularioModelo
+            {
+                NomeCompleto = "Joao da Silva",
+                Cpf = "00000000001",
+                DataNascimento = DateTime.Parse("19/01/1971"),
+                Email = "JoaoDaSilva@email.com",
+                TelefoneCelular = "41995246164"
+            });
+
+            Dados.DadosServico.SalvarTodosOsDados();*/
+
             Dados.DadosServico.CarregarDados();
+            Servicos.Cliente.ClienteServico.ListarTodosOsClientes();
+
+            //Servicos.Cliente.ClienteServico.MostrarCliente("00000000001");
 
             Console.ReadLine();
         }

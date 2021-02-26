@@ -18,7 +18,7 @@ namespace HMS_Techer.Dados
 
             try
             {
-                using(StreamReader sr = File.OpenText(DadosLocais.ArquivoClientes))
+                using (StreamReader sr = File.OpenText(DadosLocais.ArquivoClientes))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -37,17 +37,46 @@ namespace HMS_Techer.Dados
                     }
 
                 }
-                
+
             }
-            catch(IOException e)
+            catch (IOException e)
             {
                 Console.WriteLine("Ocorreu um erro: ");
                 Console.WriteLine(e.Message);
             }
         }
 
-        public static void SalvarDados()
+        public static void SalvarTodosOsDados()
         {
+            try
+            {
+                File.WriteAllText(DadosLocais.ArquivoClientes, string.Empty);
+                using (StreamWriter sw = File.AppendText(DadosLocais.ArquivoClientes))
+                {
+                    foreach (Entidades.Cliente cliente in DadosLocais.ClienteCadastrados)
+                    {
+                        sw.WriteLine(
+                            cliente.Cpf
+                            + ","
+                            + cliente.NomeCompleto
+                            + ","
+                            + cliente.DataNascimento.ToString()
+                            + ","
+                            + cliente.Email
+                            + ","
+                            + cliente.TelefoneCelular
+                            + ","
+                            + cliente.DataCriacao.ToString()
+                            );
+
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("Ocorreu um erro: ");
+                Console.WriteLine(e.Message);
+            }
 
         }
 
@@ -56,15 +85,5 @@ namespace HMS_Techer.Dados
 
 
         }
-
-        /*public static void CadastrarNovoCliente(ClienteFormularioModelo clienteFormularioModelo)
-        {
-            //Fazer o append pro csv
-        }*/
-
-        /*public static ClienteModelo BuscarCliente(string cpf)
-        {
-            
-        }*/
     }
 }

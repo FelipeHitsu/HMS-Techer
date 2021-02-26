@@ -21,7 +21,22 @@ namespace HMS_Techer.Servicos.Cliente
                 DataCriacao = DateTime.Now
             });
         }
+        public static void ListarTodosOsClientes()
+        {
+            foreach (Entidades.Cliente cliente in Dados.DadosLocais.ClienteCadastrados)
+            {
+                ClienteModelo clienteModelo = new ClienteModelo
+                {
+                    NomeCompleto = cliente.NomeCompleto,
+                    DataNascimento = cliente.DataNascimento,
+                    Idade = DateTime.Now.Year - cliente.DataNascimento.Year,
+                    Email = cliente.Email,
+                    TelefoneCelular = cliente.TelefoneCelular
+                };
 
+                Console.WriteLine(clienteModelo.ToString());
+            }
+        }
         public static void MostrarCliente(string cpf)
         {
             //Usar var
@@ -38,7 +53,7 @@ namespace HMS_Techer.Servicos.Cliente
 
             if (clienteBusca != null)
             {
-                Console.WriteLine(clienteBusca.ToString());
+                Console.WriteLine(clienteModelo.ToString());
             }
             else
                 Console.WriteLine("Cliente não cadastrado");
