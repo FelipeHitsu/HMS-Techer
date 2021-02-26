@@ -7,14 +7,49 @@ namespace HMS_Techer
     {
         static void Main(string[] args)
         {
-            /*Console.SetWindowSize(120, 30);
-
-            //Views.Tela.ConfigurarJanela();
-            Console.WriteLine("Hello World!");
-            Thread.Sleep(1000);
+            Views.Tela.ConfigurarJanela();
             Views.Tela.Carregar();
-            Console.WriteLine("OK");*/
+            bool aplicacaoFinalizada = false;
+            int estadoMenu = -1;
+            while (!aplicacaoFinalizada)
+            {
+                switch (estadoMenu)
+                {
+                    case (int)Views.Telas.Inicio:
+                        estadoMenu = Views.Inicio.Run();
+                        break;
 
+                    case (int)Views.Telas.MenuPrincipal:
+                        estadoMenu = Views.MenuPrincipal.Run();
+                        break;
+
+                    case (int)Views.Telas.CadastroClientes:
+                        estadoMenu = Views.CadastroClientes.Run();
+                        break;
+
+                    case (int)Views.Telas.BuscarCliente:
+                        estadoMenu = Views.BuscarCliente.Run();
+                        break;
+
+                    case (int)Views.Telas.ListarQuartos:
+                        estadoMenu = Views.ListarQuartos.Run();
+                        break;
+
+                    case (int)Views.Telas.RealizarReserva:
+                        estadoMenu = Views.RealizarReserva.Run();
+                        break;
+
+                    case (int)Views.Telas.CheckIn:
+                        estadoMenu = Views.CheckIn.Run();
+                        break;
+
+                    case (int)Views.Telas.CheckOut:
+                        estadoMenu = Views.CheckOut.Run();
+                        break;
+
+                }
+                Console.ReadLine();
+            }
             /*Servicos.Cliente.ClienteServico.CadastrarCliente(new Servicos.Cliente.Modelos.ClienteFormularioModelo
             {
                 NomeCompleto = "Joao da Silva",
@@ -26,7 +61,7 @@ namespace HMS_Techer
 
             Dados.DadosServico.SalvarTodosOsDados();*/
 
-            Dados.DadosServico.CarregarDados();
+            //Dados.DadosServico.CarregarDados();
             //Servicos.Cliente.ClienteServico.ListarTodosOsClientes();
 
             //Servicos.Quarto.QuartoServico.PrimeiraInstanciaQuartos();
@@ -41,11 +76,11 @@ namespace HMS_Techer
             // Servicos.Reserva.ReservaServico.CriarNovaReserva(new Servicos.Reserva.Modelos.ReservaFormularioModelo { ClienteCpf = "00000000002", QuartoNumero = 10 });
             //Servicos.Reserva.ReservaServico.FazerCheckIn(1, "00000000001");
             // Servicos.Reserva.ReservaServico.FazerCheckOut(1, 150);
-            Console.WriteLine(Dados.DadosLocais.Reservas.Count);
-            Servicos.Reserva.ReservaServico.ListarTodasAsReservas();
-            Dados.DadosServico.SalvarTodosOsDados();
+            //Console.WriteLine(Dados.DadosLocais.Reservas.Count);
+            //Servicos.Reserva.ReservaServico.ListarTodasAsReservas();
+            //Dados.DadosServico.SalvarTodosOsDados();
 
-            Console.ReadLine();
+            
         }
     }
 }

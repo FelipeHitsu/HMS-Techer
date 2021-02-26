@@ -1,0 +1,69 @@
+/*
+         * 1 - Desocupado / Livre
+         * 2 - Ocupado
+         * 3 - Reservado
+         * 4 - Em Manutenção
+         */
+
+/*
+         * 1 - Solteiro - R$ 150.00
+         * 2 - Duplo - R$ 200.00
+         * 3 - Casal - R$ 250.00
+         */
+
+
+public int ReservaId { get; set; }
+        public DateTime DataCriacao { get; set; }
+        public DateTime DataCheckIn { get; set; }
+        public DateTime DataCheckOut { get; set; }
+        public Servicos.Cliente.Modelos.ClienteFormularioModelo Cliente { get; set; }
+        public List<Entidades.Cliente> Hospedes { get; set; } = new List<Cliente>(); 
+        
+public string HospedesJSON { get; set; } 123456789/123456789 ou vazio
+
+        public Servicos.Quarto.QuartoModelo Quarto { get; set; }
+	int quartoSituacaoId
+        public double ValorDiarias { get; set; }
+        public double TaxasConsumo { get; set; }
+        public double ValorFinal { get; set; }
+
+File.WriteAllText(DadosLocais.ArquivoReservas, string.Empty);
+                using (StreamWriter sw = File.AppendText(DadosLocais.ArquivoReservas))
+                {
+                    foreach (Entidades.Reserva reserva in DadosLocais.Reservas)
+                    {
+                        sw.WriteLine(
+                            reserva.ReservaId 0
+                            + ","
+                            + reserva.DataCriacao.ToString() 1
+                            + ","
+                            + reserva.DataCheckIn.ToString() 2
+                            + ","
+                            + reserva.DataCheckOut.ToString() 3
+                            + ","
+                            + reserva.Cliente.Cpf 4
+                            + ","
+                            + reserva.HospedesJSON 5
+                            + ","
+                            + reserva.Quarto.QuartoId 6
+                            + ","
+                            + reserva.Quarto.Situacao.SituacaoId 7
+                            + ","
+                            + reserva.ValorDiarias.ToString("F2", CultureInfo.InvariantCulture) 8
+                            + ","
+                            + reserva.TaxasConsumo.ToString("F2", CultureInfo.InvariantCulture) 9
+                            + ","
+                            + reserva.ValorFinal.ToString("F2", CultureInfo.InvariantCulture) 10
+                            );
+                    }
+
+                }
+
+     Inicio = -1,
+        MenuPrincipal = 0,
+        CadastroClientes = 1,
+        BuscaCliente = 2,
+        ListaQuartos = 3,
+        RealizarReserva = 4,
+        FazerCheckIn = 5,
+        FazerCheckOut = 6

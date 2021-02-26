@@ -13,6 +13,7 @@ namespace HMS_Techer.Dados
         public static List<Quarto> Quartos = new List<Quarto>();
 
         public static List<Reserva> Reservas = new List<Reserva>();
+        public string NomeFuncionario;
 
         private static string Arquivo = @"C:\Users\felipe.santos\Documents\Codes\Techer HMS\HMS-Techer\HMS-Techer\Dados\Tabelas";
         private static string ArquivoCasa = @"F:\Documentos\Projetos\C#\HMS Techer\HMS-Techer\Dados\Tabelas";
