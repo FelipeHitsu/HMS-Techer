@@ -35,7 +35,7 @@ namespace HMS_Techer.Views
             else
             {
                 Console.WriteLine();
-                ConsolePrint.Print("\t\t              CADASTRO NAO ENCONTRADO !      ", ConsoleColor.Red, ConsoleColor.DarkGray);
+                ConsolePrint.Print("\t\t              CLIENTE NAO ENCONTRADO !      ", ConsoleColor.Red, ConsoleColor.DarkGray);
                 Console.WriteLine();
             }
 

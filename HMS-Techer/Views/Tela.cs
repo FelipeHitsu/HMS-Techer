@@ -22,7 +22,7 @@ namespace HMS_Techer.Views
             Console.WriteLine();
             Console.WriteLine();
             Console.Write("\t\t");
-            for (int i = 0; i < 41; i++)
+            for (int i = 0; i < 40; i++)
                 Console.Write("-");
 
             Console.WriteLine();
