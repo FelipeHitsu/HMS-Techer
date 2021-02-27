@@ -7,7 +7,8 @@ namespace HMS_Techer
     {
         static void Main(string[] args)
         {
-            Views.Tela.ConfigurarJanela();
+            Dados.DadosServico.CarregarDados();
+            //Views.Tela.ConfigurarJanela();
             Views.Tela.Carregar();
             bool aplicacaoFinalizada = false;
             int estadoMenu = -1;
@@ -48,7 +49,7 @@ namespace HMS_Techer
                         break;
 
                 }
-                Console.ReadLine();
+                //Console.ReadLine();
             }
             /*Servicos.Cliente.ClienteServico.CadastrarCliente(new Servicos.Cliente.Modelos.ClienteFormularioModelo
             {

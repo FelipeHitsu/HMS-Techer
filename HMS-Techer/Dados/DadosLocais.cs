@@ -14,14 +14,14 @@ namespace HMS_Techer.Dados
 
         public static List<Reserva> Reservas = new List<Reserva>();
 
-        public string NomeFuncionario;
+        public static string NomeFuncionario;
 
 
         private static string Arquivo = @"C:\Users\felipe.santos\Documents\Codes\Techer HMS\HMS-Techer\HMS-Techer\Dados\Tabelas";
         private static string ArquivoCasa = @"F:\Documentos\Projetos\C#\HMS Techer\HMS-Techer\Dados\Tabelas";
-        public static string ArquivoClientes { get; private set; } = Arquivo + @"\Clientes.csv";
-        public static string ArquivoQuartos { get; private set; } = Arquivo + @"\Quartos.csv";
-        public static string ArquivoReservas { get; private set; } = Arquivo + @"\Reservas.csv"; 
+        public static string ArquivoClientes { get; private set; } = ArquivoCasa + @"\Clientes.csv";
+        public static string ArquivoQuartos { get; private set; } = ArquivoCasa + @"\Quartos.csv";
+        public static string ArquivoReservas { get; private set; } = ArquivoCasa + @"\Reservas.csv"; 
        
     }
 }

@@ -8,7 +8,19 @@ namespace HMS_Techer.Views
     {
         public static int Run()
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            Tela.Header();
+            Tela.Footer();
+
+            ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
+            Console.WriteLine();
+            ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
+            Console.WriteLine();
+            ConsolePrint.Print("\t\t     Cadastrar um novo cliente               ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
+            
+
+            Console.ReadLine();
+            return (int)Views.Telas.MenuPrincipal;
         }
     }
 }

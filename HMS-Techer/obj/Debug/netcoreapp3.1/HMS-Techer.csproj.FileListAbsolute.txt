@@ -24,3 +24,16 @@ F:\Documentos\Projetos\C#\HMS Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Tech
 F:\Documentos\Projetos\C#\HMS Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.dll
 F:\Documentos\Projetos\C#\HMS Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.pdb
 F:\Documentos\Projetos\C#\HMS Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.genruntimeconfig.cache
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\HMS-Techer.exe
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\HMS-Techer.deps.json
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\HMS-Techer.runtimeconfig.json
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\HMS-Techer.runtimeconfig.dev.json
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\HMS-Techer.dll
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\HMS-Techer.pdb
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.csprojAssemblyReference.cache
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.AssemblyInfoInputs.cache
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.AssemblyInfo.cs
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.csproj.CoreCompileInputs.cache
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.dll
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.pdb
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.genruntimeconfig.cache
