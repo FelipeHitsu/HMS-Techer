@@ -69,5 +69,21 @@ namespace HMS_Techer.Views
 
             Console.SetCursorPosition(originalX, originalY);
         }
+
+        public static void Footer(int posX,int posY)
+        {
+            int originalX = posX;
+            int originalY = posY;
+            Console.SetCursorPosition(0, posY + 3);
+            ConsolePrint.Print("               --" + DateTime.Now.ToString("f") + "--    " + "         --Operador: " + Dados.DadosLocais.NomeFuncionario + "--",
+                ConsoleColor.DarkCyan, ConsoleColor.Gray);
+            int cursorPos = Console.CursorLeft;
+            for (int i = cursorPos; i < Console.WindowWidth; i++)
+            {
+                ConsolePrint.Print(" ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
+            }
+
+            Console.SetCursorPosition(originalX, originalY);
+        }
     }
 }

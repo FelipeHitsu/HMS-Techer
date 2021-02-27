@@ -63,6 +63,9 @@ namespace HMS_Techer.Servicos.Cliente
         {
             Entidades.Cliente clienteBusca = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == cpf);
 
+            if (clienteBusca == null)
+                return null;
+
             ClienteFormularioModelo clienteFormularioModelo = new ClienteFormularioModelo
             {
                 NomeCompleto = clienteBusca.NomeCompleto,
@@ -73,8 +76,6 @@ namespace HMS_Techer.Servicos.Cliente
             };
 
             return clienteFormularioModelo;
-
-
         }
     }
 }

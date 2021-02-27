@@ -61,6 +61,7 @@ namespace HMS_Techer.Views
                 return (int)Views.Telas.CheckOut;
             else
             {
+                Dados.DadosServico.SalvarTodosOsDados();
                 return (int)Views.Telas.MenuPrincipal;
             }
 

@@ -8,6 +8,7 @@ namespace HMS_Techer
         static void Main(string[] args)
         {
             Dados.DadosServico.CarregarDados();
+            Console.ReadLine();
             //Views.Tela.ConfigurarJanela();
             Views.Tela.Carregar();
             bool aplicacaoFinalizada = false;

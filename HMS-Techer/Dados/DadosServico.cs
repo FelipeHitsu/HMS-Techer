@@ -119,7 +119,7 @@ namespace HMS_Techer.Dados
                     }
                 }
                 //Escrever Quartos no CSV
-                File.WriteAllText(DadosLocais.ArquivoQuartos, string.Empty);
+                /*File.WriteAllText(DadosLocais.ArquivoQuartos, string.Empty);
                 using (StreamWriter sw = File.AppendText(DadosLocais.ArquivoQuartos))
                 {
                     foreach (Entidades.Quarto quarto in DadosLocais.Quartos)
@@ -159,7 +159,9 @@ namespace HMS_Techer.Dados
                             );
                     }
 
-                }
+                }*/
+
+                Console.WriteLine("Dados Salvos com sucesso");
 
             }
             catch (IOException e)

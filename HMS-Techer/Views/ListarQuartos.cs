@@ -42,11 +42,69 @@ namespace HMS_Techer.Views
             Console.BackgroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.Red;
 
-            Console.ReadLine();
+            char escolha = char.Parse(Console.ReadLine());
 
             Console.BackgroundColor = originalBackground;
             Console.ForegroundColor = originalForeground;
 
+            if (escolha == 'o' || escolha == 'O')
+            {
+                Console.Clear();
+                Tela.Header();
+                Servicos.Quarto.QuartoServico.ListarQuartosPorSituacao(2);
+                
+
+                Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
+                Tela.Footer(Console.CursorLeft, Console.CursorTop);
+                Console.ReadLine();
+                return (int)Views.Telas.MenuPrincipal;
+            }
+            if (escolha == 'l' || escolha == 'L')
+            {
+                Console.Clear();
+                Tela.Header();
+                Servicos.Quarto.QuartoServico.ListarQuartosPorSituacao(1);
+                
+
+                Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
+                Tela.Footer(Console.CursorLeft,Console.CursorTop);
+                Console.ReadLine();
+                return (int)Views.Telas.MenuPrincipal;
+            }
+            if (escolha == 'r' || escolha == 'R')
+            {
+                Console.Clear();
+                Tela.Header();
+                Servicos.Quarto.QuartoServico.ListarQuartosPorSituacao(3);
+                
+                Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
+                Tela.Footer(Console.CursorLeft, Console.CursorTop);
+                Console.ReadLine();
+                return (int)Views.Telas.MenuPrincipal;
+            }
+            if (escolha == 'm' || escolha == 'M')
+            {
+                Console.Clear();
+                Tela.Header();
+                Servicos.Quarto.QuartoServico.ListarQuartosPorSituacao(4);
+              
+                Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
+                Tela.Footer(Console.CursorLeft, Console.CursorTop);
+                Console.ReadLine();
+                return (int)Views.Telas.MenuPrincipal;
+            }
+            else
+            {
+                Console.Clear();
+                Tela.Header();
+                Console.WriteLine();
+                ConsolePrint.Print("\t\t              CADASTRO NAO ENCONTRADO !      ", ConsoleColor.Red, ConsoleColor.DarkGray);
+                Console.WriteLine();
+                Tela.Footer();
+            }
+
+            Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
+            Console.ReadLine();
             return (int)Views.Telas.MenuPrincipal;
         }
     }

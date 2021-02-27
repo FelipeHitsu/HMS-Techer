@@ -15,16 +15,16 @@ namespace HMS_Techer.Servicos.Quarto
         public override string ToString()
         {
             return System.Environment.NewLine 
-                +"Numero do Quarto: "
+                + "\t\t     Numero do Quarto: "
                 + QuartoId
                 + System.Environment.NewLine
-                + "Tipo: "
+                + "\t\t     Tipo: "
                 + Tipo.Descricao
                 + System.Environment.NewLine
-                + "Valor: "
+                + "\t\t     Valor: "
                 + Tipo.Valor.ToString("F2",CultureInfo.InvariantCulture)
                 + System.Environment.NewLine
-                + "Situacao: "
+                + "\t\t     Situacao: "
                 + Situacao.Descricao
                 + System.Environment.NewLine;
         }

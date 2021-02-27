@@ -55,12 +55,12 @@ namespace HMS_Techer.Servicos.Quarto
                 Console.WriteLine(quartoModelo);
         }
 
-        public static void ListarQuartosPorSituacao(SituacaoQuarto situacao)
+        public static void ListarQuartosPorSituacao(int situacaoId)
         {
             List<QuartoModelo> quartosModelo = new List<QuartoModelo>();
             foreach (Entidades.Quarto quarto in DadosLocais.Quartos)
             {
-                if (quarto.Situacao == situacao)
+                if (quarto.Situacao.SituacaoId == situacaoId)
                 {
                     quartosModelo.Add(new QuartoModelo
                     {
