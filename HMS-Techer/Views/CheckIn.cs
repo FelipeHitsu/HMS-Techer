@@ -19,6 +19,7 @@ namespace HMS_Techer.Views
             Console.WriteLine();
             ConsolePrint.Print("\t\t     Realizar Check In                       ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
 
+            Servicos.Reserva.ReservaServico.ListarTodasAsReservas();
 
             Console.ReadLine();
             return (int)Views.Telas.MenuPrincipal;

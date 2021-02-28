@@ -8,5 +8,6 @@ namespace HMS_Techer.Servicos.Reserva.Modelos
     {
         public string ClienteCpf { get; set; }
         public int QuartoNumero { get; set; }
+
     }
 }

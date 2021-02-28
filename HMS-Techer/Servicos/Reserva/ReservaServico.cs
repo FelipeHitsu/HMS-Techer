@@ -112,6 +112,20 @@ namespace HMS_Techer.Servicos.Reserva
             }
         }
 
+        public static void MostrarUltimaReserva()
+        {
+            var reserva = Dados.DadosLocais.Reservas.Last<Entidades.Reserva>();
+            var reservaModelo = new Reserva.Modelos.ReservaRealizadaModelo
+            {
+                ReservaId = reserva.ReservaId,
+                DataCriacao = reserva.DataCriacao, 
+                Cliente = reserva.Cliente,
+                Quarto = reserva.Quarto,
+            };
+
+            Console.WriteLine(reservaModelo);
+        }
+
         public static void InicializaReservas()
         {
             foreach (Entidades.Reserva reserva in Dados.DadosLocais.Reservas)

@@ -34,10 +34,12 @@ namespace HMS_Techer.Views
             formularioReserva.ClienteCpf = cpfCadastro;
 
             Servicos.Reserva.ReservaServico.CriarNovaReserva(formularioReserva);
-
+            
             Console.WriteLine();
             ConsolePrint.Print("\t\t              RESERVA REALIZADA !          ", ConsoleColor.Green, ConsoleColor.DarkGray);
             Console.WriteLine();
+
+            Servicos.Reserva.ReservaServico.MostrarUltimaReserva();
 
             Console.ReadLine();
             return (int)Views.Telas.MenuPrincipal;

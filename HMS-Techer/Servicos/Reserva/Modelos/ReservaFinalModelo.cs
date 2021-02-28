@@ -23,41 +23,41 @@ namespace HMS_Techer.Servicos.Reserva.Modelos
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Numero da Reserva: ");
+            sb.Append("\t\t     Numero da Reserva: ");
             sb.AppendLine(ReservaId.ToString());
             
-            sb.Append("Reserva Realizada em: ");
+            sb.Append("\t\t     Reserva Realizada em: ");
             sb.AppendLine(DataCriacao.ToString("f"));
             
-            sb.AppendLine("Cliente: ");
+            sb.AppendLine("\t\t     Cliente: ");
             sb.AppendLine(Cliente.ToString());
 
-            sb.Append("Quarto: ");
+            sb.Append("\t\t     Quarto: ");
             sb.AppendLine(Quarto.ToString());
 
-            sb.AppendLine("Hospedes: ");
+            sb.AppendLine("\t\t     Hospedes: ");
             
             foreach(Entidades.Cliente cliente in Hospedes)
             {
                 sb.AppendLine(Servicos.Cliente.ClienteServico.BuscarCliente(cliente.Cpf).ToString());
             }
 
-            sb.Append("Check in Realizado em: ");
+            sb.Append("\t\t     Check in Realizado em: ");
             sb.AppendLine(DataCheckIn.ToString("f"));
 
-            sb.Append("Check out Realizado em: ");
+            sb.Append("\t\t     Check out Realizado em: ");
             sb.AppendLine(DataCheckOut.ToString("f"));
 
-            sb.Append("Quantidade de Diarias: ");
+            sb.Append("\t\t     Quantidade de Diarias: ");
             sb.AppendLine(((DataCheckOut - DataCheckIn).Days).ToString());
 
-            sb.Append("Valor das Diarias: ");
+            sb.Append("\t\t     Valor das Diarias: ");
             sb.AppendLine(ValorDiarias.ToString("F2", CultureInfo.InvariantCulture));
 
-            sb.Append("Valor de taxas e consumo: ");
+            sb.Append("\t\t     Valor de taxas e consumo: ");
             sb.AppendLine(TaxasConsumo.ToString("F2", CultureInfo.InvariantCulture));
 
-            sb.Append("Valor Total da Hospedagem: ");
+            sb.Append("\t\t     Valor Total da Hospedagem: ");
             sb.AppendLine(ValorFinal.ToString("F2", CultureInfo.InvariantCulture));
 
             return sb.ToString();
