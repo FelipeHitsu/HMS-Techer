@@ -145,5 +145,22 @@ namespace HMS_Techer.Servicos.Reserva
                 reserva.Quarto.Situacao = Servicos.Quarto.QuartoServico.ParseSituacao(reserva.QuartoSituacaoID);
             }
         }
+
+        public static Quarto.QuartoModelo QuartoDaReserva(int reservaId)
+        {
+            var reserva = Dados.DadosLocais.Reservas.Find(a => a.ReservaId == reservaId);
+
+            if (reserva == null)
+                return null;
+
+            var quartoReserva = new Quarto.QuartoModelo
+            {
+                QuartoId = reserva.Quarto.QuartoId,
+                Situacao = reserva.Quarto.Situacao,
+                Tipo = reserva.Quarto.Tipo
+            };
+
+            return quartoReserva;
+        }
     }
 }
