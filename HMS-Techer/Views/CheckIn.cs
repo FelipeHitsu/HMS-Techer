@@ -17,7 +17,7 @@ namespace HMS_Techer.Views
             Console.WriteLine();
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
-            ConsolePrint.Print("\t\t     Realizar um CheckIN                    ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
+            ConsolePrint.Print("\t\t     Realizar um CheckIN                     ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();

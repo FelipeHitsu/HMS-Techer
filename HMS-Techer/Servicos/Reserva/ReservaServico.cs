@@ -81,13 +81,37 @@ namespace HMS_Techer.Servicos.Reserva
 
         public static void FazerCheckOut(int reservaId, double consumoETaxas)
         {
-            var reserva = Dados.DadosLocais.Reservas.Find(a => a.ReservaId == reservaId);
-            reserva.DataCheckOut = DateTime.Now;
-            int diasHospedagem = (reserva.DataCheckOut - reserva.DataCheckIn).Days;
-            reserva.ValorDiarias = diasHospedagem * reserva.Quarto.Tipo.Valor;
-            reserva.TaxasConsumo = consumoETaxas;
-            reserva.ValorFinal = reserva.ValorDiarias + reserva.TaxasConsumo;
-            reserva.Quarto.Situacao = new Entidades.SituacaoQuarto { SituacaoId = 4, Descricao = "Em Manutenção" };
+            try
+            {
+                var reserva = Dados.DadosLocais.Reservas.Find(a => a.ReservaId == reservaId);
+                reserva.DataCheckOut = DateTime.Now;
+                int diasHospedagem = (reserva.DataCheckOut - reserva.DataCheckIn).Days;
+                reserva.ValorDiarias = diasHospedagem * reserva.Quarto.Tipo.Valor;
+                reserva.TaxasConsumo = consumoETaxas;
+                reserva.ValorFinal = reserva.ValorDiarias + reserva.TaxasConsumo;
+                reserva.Quarto.Situacao = new Entidades.SituacaoQuarto { SituacaoId = 4, Descricao = "Em Manutenção" };
+
+                var reservaModelo = new Reserva.Modelos.ReservaFinalModelo
+                {
+                    ReservaId = reserva.ReservaId,
+                    DataCriacao = reserva.DataCriacao,
+                    DataCheckIn = reserva.DataCheckIn,
+                    DataCheckOut = reserva.DataCheckOut,
+                    Cliente = reserva.Cliente,
+                    Hospedes = reserva.Hospedes,
+                    Quarto = reserva.Quarto,
+                    ValorDiarias = reserva.ValorDiarias,
+                    TaxasConsumo = reserva.TaxasConsumo,
+                    ValorFinal = reserva.ValorFinal
+                };
+
+                Console.WriteLine(reservaModelo);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("CheckIn não realizado, erro encontrado");
+                Console.WriteLine(e.Message);
+            }
         }
 
         public static void ListarTodasAsReservas()
@@ -111,6 +135,7 @@ namespace HMS_Techer.Servicos.Reserva
                 Console.WriteLine(reservaModelo);
             }
         }
+        
 
         public static void MostrarUltimaReserva()
         {
@@ -118,7 +143,7 @@ namespace HMS_Techer.Servicos.Reserva
             var reservaModelo = new Reserva.Modelos.ReservaRealizadaModelo
             {
                 ReservaId = reserva.ReservaId,
-                DataCriacao = reserva.DataCriacao, 
+                DataCriacao = reserva.DataCriacao,
                 Cliente = reserva.Cliente,
                 Quarto = reserva.Quarto,
             };
