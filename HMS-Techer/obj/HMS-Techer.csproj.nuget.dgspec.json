@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Documentos\\Projetos\\C#\\HMS-Techer\\HMS-Techer\\HMS-Techer.csproj": {}
+    "C:\\Users\\felipe.santos\\Documents\\Codes\\Techer HMS\\HMS-Techer\\HMS-Techer\\HMS-Techer.csproj": {}
   },
   "projects": {
-    "F:\\Documentos\\Projetos\\C#\\HMS-Techer\\HMS-Techer\\HMS-Techer.csproj": {
+    "C:\\Users\\felipe.santos\\Documents\\Codes\\Techer HMS\\HMS-Techer\\HMS-Techer\\HMS-Techer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Documentos\\Projetos\\C#\\HMS-Techer\\HMS-Techer\\HMS-Techer.csproj",
+        "projectUniqueName": "C:\\Users\\felipe.santos\\Documents\\Codes\\Techer HMS\\HMS-Techer\\HMS-Techer\\HMS-Techer.csproj",
         "projectName": "HMS-Techer",
-        "projectPath": "F:\\Documentos\\Projetos\\C#\\HMS-Techer\\HMS-Techer\\HMS-Techer.csproj",
-        "packagesPath": "C:\\Users\\Hitsu\\.nuget\\packages\\",
-        "outputPath": "F:\\Documentos\\Projetos\\C#\\HMS-Techer\\HMS-Techer\\obj\\",
+        "projectPath": "C:\\Users\\felipe.santos\\Documents\\Codes\\Techer HMS\\HMS-Techer\\HMS-Techer\\HMS-Techer.csproj",
+        "packagesPath": "C:\\Users\\felipe.santos\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\felipe.santos\\Documents\\Codes\\Techer HMS\\HMS-Techer\\HMS-Techer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Hitsu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\felipe.santos\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
