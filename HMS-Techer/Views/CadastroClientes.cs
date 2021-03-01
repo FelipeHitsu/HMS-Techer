@@ -45,7 +45,13 @@ namespace HMS_Techer.Views
                 TelefoneCelular = telefoneCadastro
             };
 
-            novoCadastro.Validar();
+            if (!novoCadastro.Validar())
+            {
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+                Console.ReadLine();
+                return (int)Views.Telas.MenuPrincipal;
+            }
+
 
             Servicos.Cliente.ClienteServico.CadastrarCliente(novoCadastro);
 

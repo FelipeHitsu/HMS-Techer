@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace HMS_Techer.Views
 {
@@ -16,7 +17,7 @@ namespace HMS_Techer.Views
             Console.WriteLine();
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
-            ConsolePrint.Print("\t\t     Menu Principal                          ",ConsoleColor.DarkCyan,ConsoleColor.Gray);
+            ConsolePrint.Print("\t\t     Menu Principal                          ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
             ConsolePrint.Print("\t\t     Selecionar Atividade:                   ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             var cursorPos = (Console.CursorLeft, Console.CursorTop);
@@ -31,11 +32,12 @@ namespace HMS_Techer.Views
             ConsolePrint.Print("\t\t     4 - Realizar uma reserva                " + System.Environment.NewLine, ConsoleColor.DarkCyan, ConsoleColor.Gray);
             ConsolePrint.Print("\t\t     5 - Realizar um check in                " + System.Environment.NewLine, ConsoleColor.DarkCyan, ConsoleColor.Gray);
             ConsolePrint.Print("\t\t     6 - Realizar um check out               " + System.Environment.NewLine, ConsoleColor.DarkCyan, ConsoleColor.Gray);
+            ConsolePrint.Print("\t\t     7 - Encerrar o sistema                  " + System.Environment.NewLine, ConsoleColor.DarkCyan, ConsoleColor.Gray);
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Tela.Footer();
-            Console.SetCursorPosition(cursorPos.CursorLeft - 18,cursorPos.CursorTop);
+            Console.SetCursorPosition(cursorPos.CursorLeft - 18, cursorPos.CursorTop);
 
             ConsoleColor originalForeground = Console.ForegroundColor;
             ConsoleColor originalBackground = Console.BackgroundColor;
@@ -59,11 +61,11 @@ namespace HMS_Techer.Views
                 return (int)Views.Telas.CheckIn;
             if (escolha == 6)
                 return (int)Views.Telas.CheckOut;
+            if (escolha == 7)
+                return (int)Views.Telas.Finalizar;
+
             else
-            {
-                Dados.DadosServico.SalvarTodosOsDados();
                 return (int)Views.Telas.MenuPrincipal;
-            }
 
         }
     }

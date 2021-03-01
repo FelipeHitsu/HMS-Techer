@@ -13,6 +13,7 @@ namespace HMS_Techer.Views
         ListarQuartos = 3,
         RealizarReserva = 4,
         CheckIn = 5,
-        CheckOut = 6
+        CheckOut = 6,
+        Finalizar = 7
     }
 }

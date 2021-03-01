@@ -161,7 +161,7 @@ namespace HMS_Techer.Dados
 
                 }
 
-                Console.WriteLine("Dados Salvos com sucesso");
+                //Console.WriteLine("Dados Salvos com sucesso");
 
             }
             catch (IOException e)

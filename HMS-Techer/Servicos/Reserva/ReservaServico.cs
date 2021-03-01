@@ -7,76 +7,88 @@ namespace HMS_Techer.Servicos.Reserva
 {
     class ReservaServico
     {
-        public static void CriarNovaReserva(Modelos.ReservaFormularioModelo reservaFormularioModelo)
+        public static bool CriarNovaReserva(Modelos.ReservaFormularioModelo reservaFormularioModelo)
         {
-            Dados.DadosLocais.Reservas.Add(new Entidades.Reserva
+            var quartoBusca = Quarto.QuartoServico.BuscarQuarto(reservaFormularioModelo.QuartoNumero);
+            var clienteBusca = Cliente.ClienteServico.BuscarCliente(reservaFormularioModelo.ClienteCpf);
+
+            if (quartoBusca.Situacao.SituacaoId == 1 && clienteBusca != null)
             {
-                ReservaId = Dados.DadosLocais.Reservas.Count + 1,
-                DataCriacao = DateTime.Now,
-                Cliente = Cliente.ClienteServico.BuscarCliente(reservaFormularioModelo.ClienteCpf),
-                Quarto = Quarto.QuartoServico.BuscarQuarto(reservaFormularioModelo.QuartoNumero)
-            });
-            Dados.DadosLocais.Quartos.ForEach(q =>
-            {
-                if (q.QuartoId == reservaFormularioModelo.QuartoNumero)
+                Dados.DadosLocais.Reservas.Add(new Entidades.Reserva
                 {
-                    q.Situacao.SituacaoId = 3;
-                    q.Situacao.Descricao = "Reservado";
-                }
-            });
-            //Quarto.QuartoServico.AlterarSituacao(reservaFormularioModelo.QuartoNumero, new Entidades.SituacaoQuarto { SituacaoId = 3, Descricao = "Reservado" });
+                    ReservaId = Dados.DadosLocais.Reservas.Count + 1,
+                    DataCriacao = DateTime.Now,
+                    Cliente = clienteBusca,
+                    Quarto = quartoBusca
+                });
+                Dados.DadosLocais.Quartos.ForEach(q =>
+                {
+                    if (q.QuartoId == reservaFormularioModelo.QuartoNumero)
+                    {
+                        q.Situacao.SituacaoId = 3;
+                        q.Situacao.Descricao = "Reservado";
+                    }
+                });
+                return true;
+            }
+
+            else
+                return false;
+
         }
 
-        public static void FazerCheckIn(int reservaId, string hospedeCpf)
+        public static bool FazerCheckIn(int reservaId, string hospedeCpf)
         {
-            try
+
+            var hospede = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == hospedeCpf);
+
+            if (hospede == null) 
             {
-                var hospede = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == hospedeCpf);
-                foreach (Entidades.Reserva reserva in Dados.DadosLocais.Reservas)
+                return false;
+            }
+
+            foreach (Entidades.Reserva reserva in Dados.DadosLocais.Reservas)
+            {
+                if (reserva.ReservaId == reservaId )
                 {
-                    if (reserva.ReservaId == reservaId)
-                    {
-                        reserva.Hospedes.Add(hospede);
-                        reserva.HospedesJSON = hospedeCpf + "/" + string.Empty;
-                        reserva.DataCheckIn = DateTime.Now;
-                        reserva.Quarto.Situacao.SituacaoId = 2;
-                        reserva.Quarto.Situacao.Descricao = "Ocupado";
-                        //Quarto.QuartoServico.AlterarSituacao(reserva.Quarto.QuartoId, new Entidades.SituacaoQuarto { SituacaoId = 2, Descricao = "Ocupado" });
-                    }
+                    reserva.Hospedes.Add(hospede);
+                    reserva.HospedesJSON = hospedeCpf + "/" + string.Empty;
+                    reserva.DataCheckIn = DateTime.Now;
+                    reserva.Quarto.Situacao.SituacaoId = 2;
+                    reserva.Quarto.Situacao.Descricao = "Ocupado";
+                    return true;
                 }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("CheckIn não realizado, erro encontrado");
-                Console.WriteLine(e.Message);
-            }
+
+            return false;
+
         }
 
-        public static void FazerCheckIn(int reservaId, string hospedeCpf1, string hospedeCpf2)
+        public static bool FazerCheckIn(int reservaId, string hospedeCpf1, string hospedeCpf2)
         {
-            try
+
+            var hospede = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == hospedeCpf1);
+            var hospede2 = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == hospedeCpf2);
+
+            if (hospede == null || hospede2 == null)
             {
-                var hospede = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == hospedeCpf1);
-                var hospede2 = Dados.DadosLocais.ClienteCadastrados.Find(a => a.Cpf == hospedeCpf2);
-                foreach (Entidades.Reserva reserva in Dados.DadosLocais.Reservas)
+                return false;
+            }
+
+            foreach (Entidades.Reserva reserva in Dados.DadosLocais.Reservas)
+            {
+                if (reserva.ReservaId == reservaId )
                 {
-                    if (reserva.ReservaId == reservaId)
-                    {
-                        reserva.Hospedes.Add(hospede);
-                        reserva.Hospedes.Add(hospede2);
-                        reserva.HospedesJSON = hospedeCpf1 + "/" + hospedeCpf2;
-                        reserva.DataCheckIn = DateTime.Now;
-                        reserva.Quarto.Situacao.SituacaoId = 2;
-                        reserva.Quarto.Situacao.Descricao = "Ocupado";
-                        //Quarto.QuartoServico.AlterarSituacao(reserva.Quarto.QuartoId, new Entidades.SituacaoQuarto { SituacaoId = 2, Descricao = "Ocupado" });
-                    }
+                    reserva.Hospedes.Add(hospede);
+                    reserva.Hospedes.Add(hospede2);
+                    reserva.HospedesJSON = hospedeCpf1 + "/" + hospedeCpf2;
+                    reserva.DataCheckIn = DateTime.Now;
+                    reserva.Quarto.Situacao.SituacaoId = 2;
+                    reserva.Quarto.Situacao.Descricao = "Ocupado";
+                    return true;
                 }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("CheckIn não realizado, erro encontrado");
-                Console.WriteLine(e.Message);
-            }
+            return false;
         }
 
         public static void FazerCheckOut(int reservaId, double consumoETaxas)
@@ -135,7 +147,7 @@ namespace HMS_Techer.Servicos.Reserva
                 Console.WriteLine(reservaModelo);
             }
         }
-        
+
 
         public static void MostrarUltimaReserva()
         {
@@ -170,7 +182,44 @@ namespace HMS_Techer.Servicos.Reserva
                 reserva.Quarto.Situacao = Servicos.Quarto.QuartoServico.ParseSituacao(reserva.QuartoSituacaoID);
             }
         }
+        public static bool ReservaValidaOut(int reservaId)
+        {
+            var reserva = Dados.DadosLocais.Reservas.Find(a => a.ReservaId == reservaId);
 
+            if (reserva == null)
+            {
+                Console.WriteLine("\t\t Reserva não encontrada");
+
+                Console.Write("\t\t Pressiona qualquer tecla para continuar");
+                Console.ReadLine();
+                return false;
+            }
+            if(reserva.Quarto.Situacao.SituacaoId != 2)
+            {
+                Console.WriteLine("\t\t Não foi efetuado Check Out, Não foi realizado check in para essa reserva");
+
+                Console.Write("\t\t Pressiona qualquer tecla para continuar");
+                Console.ReadLine();
+                return false;
+            }
+
+            return true;
+        }
+        public static bool ReservaValidaIn(int reservaId)
+        {
+            var reserva = Dados.DadosLocais.Reservas.Find(a => a.ReservaId == reservaId);
+
+            if (reserva == null)
+            {
+                Console.WriteLine("\t\t Reserva não encontrada");
+
+                Console.Write("\t\t Pressiona qualquer tecla para continuar");
+                Console.ReadLine();
+                return false;
+            }
+
+            return true;
+        }
         public static Quarto.QuartoModelo QuartoDaReserva(int reservaId)
         {
             var reserva = Dados.DadosLocais.Reservas.Find(a => a.ReservaId == reservaId);

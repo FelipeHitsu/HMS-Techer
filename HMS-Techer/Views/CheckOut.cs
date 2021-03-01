@@ -25,6 +25,11 @@ namespace HMS_Techer.Views
             Console.Write("\t\t Insira o Número da Reserva: ");
             int numeroReserva = int.Parse(Console.ReadLine());
 
+            if (!Servicos.Reserva.ReservaServico.ReservaValidaOut(numeroReserva))
+            {
+                return (int)Views.Telas.MenuPrincipal;
+            }
+
             Console.Write("\t\t Insira o valor de taxas e consumo: ");
             double taxasConsumo = double.Parse(Console.ReadLine());
 
