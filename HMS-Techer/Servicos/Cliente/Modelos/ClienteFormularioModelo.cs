@@ -3,7 +3,7 @@ using HMS_Techer.Exceptions;
 
 namespace HMS_Techer.Servicos.Cliente.Modelos
 {
-    class ClienteFormularioModelo
+    public class ClienteFormularioModelo
     {
 
         public string Cpf { get; set; }

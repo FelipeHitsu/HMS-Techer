@@ -51,7 +51,7 @@ namespace HMS_Techer.Views
             {
                 Console.Clear();
                 Tela.Header();
-                Servicos.Quarto.QuartoServico.ListarQuartosPorSituacao(2);
+                Servicos.Quarto.QuartoService.ListarQuartosPorSituacao(2);
                 
 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
@@ -63,7 +63,7 @@ namespace HMS_Techer.Views
             {
                 Console.Clear();
                 Tela.Header();
-                Servicos.Quarto.QuartoServico.ListarQuartosPorSituacao(1);
+                Servicos.Quarto.QuartoService.ListarQuartosPorSituacao(1);
                 
 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
@@ -75,7 +75,7 @@ namespace HMS_Techer.Views
             {
                 Console.Clear();
                 Tela.Header();
-                Servicos.Quarto.QuartoServico.ListarQuartosPorSituacao(3);
+                Servicos.Quarto.QuartoService.ListarQuartosPorSituacao(3);
                 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
                 Tela.Footer(Console.CursorLeft, Console.CursorTop);
@@ -86,7 +86,7 @@ namespace HMS_Techer.Views
             {
                 Console.Clear();
                 Tela.Header();
-                Servicos.Quarto.QuartoServico.ListarQuartosPorSituacao(4);
+                Servicos.Quarto.QuartoService.ListarQuartosPorSituacao(4);
               
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
                 Tela.Footer(Console.CursorLeft, Console.CursorTop);

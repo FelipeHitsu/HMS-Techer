@@ -4,8 +4,13 @@ using System.Text;
 
 namespace HMS_Techer.Entidades
 {
-    class Cliente
+    public class Cliente
     {
+        public Cliente()
+        {
+
+        }
+
         public string Cpf { get; set; }
         public string NomeCompleto { get; set; }
         public DateTime DataNascimento { get; set; }

@@ -10,89 +10,89 @@ namespace HMS_Techer.Dados
 {
     class DadosServico
     {
-        public static void CarregarDados()
-        {
-            Console.WriteLine("Caminho arquivo Clientes: " + Path.GetFullPath(DadosLocais.ArquivoClientes));
-            Console.WriteLine("Caminho arquivo Quartos: " + Path.GetFullPath(DadosLocais.ArquivoQuartos));
-            Console.WriteLine("Caminho arquivo Reservas: " + Path.GetFullPath(DadosLocais.ArquivoReservas));
+        /*   public static void CarregarDados()
+           {
+               Console.WriteLine("Caminho arquivo Clientes: " + Path.GetFullPath(DadosLocais.ArquivoClientes));
+               Console.WriteLine("Caminho arquivo Quartos: " + Path.GetFullPath(DadosLocais.ArquivoQuartos));
+               Console.WriteLine("Caminho arquivo Reservas: " + Path.GetFullPath(DadosLocais.ArquivoReservas));
 
-            DadosLocais.ClienteCadastrados.Clear();
+               DadosLocais.ClienteCadastrados.Clear();
 
-            try
-            {
-                using (StreamReader sr = File.OpenText(DadosLocais.ArquivoClientes))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-                        string[] dadosLidos = line.Split(',');
+               try
+               {
+                   using (StreamReader sr = File.OpenText(DadosLocais.ArquivoClientes))
+                   {
+                       while (!sr.EndOfStream)
+                       {
+                           string line = sr.ReadLine();
+                           string[] dadosLidos = line.Split(',');
 
-                        DadosLocais.ClienteCadastrados.Add(new Entidades.Cliente
-                        {
-                            Cpf = dadosLidos[0],
-                            NomeCompleto = dadosLidos[1],
-                            DataNascimento = DateTime.Parse(dadosLidos[2]),
-                            Email = dadosLidos[3],
-                            TelefoneCelular = dadosLidos[4],
-                            DataCriacao = DateTime.Parse(dadosLidos[5])
-                        });
-                    }
+                           DadosLocais.ClienteCadastrados.Add(new Entidades.Cliente
+                           {
+                               Cpf = dadosLidos[0],
+                               NomeCompleto = dadosLidos[1],
+                               DataNascimento = DateTime.Parse(dadosLidos[2]),
+                               Email = dadosLidos[3],
+                               TelefoneCelular = dadosLidos[4],
+                               DataCriacao = DateTime.Parse(dadosLidos[5])
+                           });
+                       }
 
-                }
+                   }
 
-                using (StreamReader sr = File.OpenText(DadosLocais.ArquivoQuartos))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-                        string[] dadosLidos = line.Split(',');
+                   using (StreamReader sr = File.OpenText(DadosLocais.ArquivoQuartos))
+                   {
+                       while (!sr.EndOfStream)
+                       {
+                           string line = sr.ReadLine();
+                           string[] dadosLidos = line.Split(',');
 
-                        DadosLocais.Quartos.Add(new Entidades.Quarto
-                        {
-                            QuartoId = int.Parse(dadosLidos[0]),
-                            Tipo = Servicos.Quarto.QuartoServico.ParseTipoQuarto(int.Parse(dadosLidos[1])),
-                            Situacao = Servicos.Quarto.QuartoServico.ParseSituacao(int.Parse(dadosLidos[2])),
-                        });
-                    }
+                           DadosLocais.Quartos.Add(new Entidades.Quarto
+                           {
+                               QuartoId = int.Parse(dadosLidos[0]),
+                               Tipo = Servicos.Quarto.QuartoServico.ParseTipoQuarto(int.Parse(dadosLidos[1])),
+                               Situacao = Servicos.Quarto.QuartoServico.ParseSituacao(int.Parse(dadosLidos[2])),
+                           });
+                       }
 
-                }
+                   }
 
-                using (StreamReader sr = File.OpenText(DadosLocais.ArquivoReservas))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-                        string[] dadosLidos = line.Split(',');
-                        //string[] HospedeCpfTestes = dadosLidos[5].Split('/');
+                   using (StreamReader sr = File.OpenText(DadosLocais.ArquivoReservas))
+                   {
+                       while (!sr.EndOfStream)
+                       {
+                           string line = sr.ReadLine();
+                           string[] dadosLidos = line.Split(',');
+                           //string[] HospedeCpfTestes = dadosLidos[5].Split('/');
 
-                        DadosLocais.Reservas.Add(
-                                new Entidades.Reserva
-                                {
-                                    ReservaId = int.Parse(dadosLidos[0]),
-                                    DataCriacao = DateTime.Parse(dadosLidos[1]),
-                                    DataCheckIn = DateTime.Parse(dadosLidos[2]),
-                                    DataCheckOut = DateTime.Parse(dadosLidos[3]),
-                                    Cliente = Servicos.Cliente.ClienteServico.BuscarCliente(dadosLidos[4]),
-                                    HospedesJSON = dadosLidos[5],
-                                    Quarto = Servicos.Quarto.QuartoServico.BuscarQuarto(int.Parse(dadosLidos[6])),
-                                    QuartoSituacaoID = int.Parse(dadosLidos[7]),
-                                    ValorDiarias = double.Parse(dadosLidos[8],CultureInfo.InvariantCulture),
-                                    TaxasConsumo = double.Parse(dadosLidos[9], CultureInfo.InvariantCulture),
-                                    ValorFinal = double.Parse(dadosLidos[10], CultureInfo.InvariantCulture)
-                                }
-                                );
-                    }
-                }
+                           DadosLocais.Reservas.Add(
+                                   new Entidades.Reserva
+                                   {
+                                       ReservaId = int.Parse(dadosLidos[0]),
+                                       DataCriacao = DateTime.Parse(dadosLidos[1]),
+                                       CheckIn = DateTime.Parse(dadosLidos[2]),
+                                       CheckOut = DateTime.Parse(dadosLidos[3]),
+                                       Cliente = Servicos.Cliente.ClienteServico.BuscarCliente(dadosLidos[4]),
+                                       HospedesJSON = dadosLidos[5],
+                                       Quarto = Servicos.Quarto.QuartoServico.BuscarQuarto(int.Parse(dadosLidos[6])),
+                                       QuartoSituacaoID = int.Parse(dadosLidos[7]),
+                                       ValorDiarias = double.Parse(dadosLidos[8],CultureInfo.InvariantCulture),
+                                       TaxasConsumo = double.Parse(dadosLidos[9], CultureInfo.InvariantCulture),
+                                       ValorFinal = double.Parse(dadosLidos[10], CultureInfo.InvariantCulture)
+                                   }
+                                   );
+                       }
+                   }
 
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine("Ocorreu um erro: ");
-                Console.WriteLine(e.Message);
-            }
-        }
+               }
+               catch (IOException e)
+               {
+                   Console.WriteLine("Ocorreu um erro: ");
+                   Console.WriteLine(e.Message);
+               }
+           }*/
 
-        public static void SalvarTodosOsDados()
+        /*public static void SalvarTodosOsDados()
         {
             try
             {
@@ -170,7 +170,7 @@ namespace HMS_Techer.Dados
                 Console.WriteLine(e.Message);
             }
 
-        }
+        }*/
 
         public static void AtualizarDados()
         {

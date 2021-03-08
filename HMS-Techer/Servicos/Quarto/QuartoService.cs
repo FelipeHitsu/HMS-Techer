@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Text;
 using HMS_Techer.Entidades;
 using HMS_Techer.Dados;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace HMS_Techer.Servicos.Quarto
 {
-    class QuartoServico
+    class QuartoService
     {
-        public static void CriarQuarto(QuartoModelo modeloQuarto)
+        private readonly HmsTecherContext _context;
+
+        public QuartoService(HmsTecherContext context)
+        {
+            _context = context;
+        }
+
+        /*public static void CriarQuarto(QuartoModelo modeloQuarto)
         {
             DadosLocais.Quartos.Add(new Entidades.Quarto
             {
@@ -16,10 +25,11 @@ namespace HMS_Techer.Servicos.Quarto
                 Tipo = modeloQuarto.Tipo,
                 Situacao = new SituacaoQuarto { SituacaoId = 1, Descricao = "Livre" }
             });
-        }
-        public static QuartoModelo BuscarQuarto(int quartoId)
+        }*/
+
+        public QuartoModelo BuscarQuarto(int quartoId)
         {
-            Entidades.Quarto quartoBusca = DadosLocais.Quartos.Find(a => a.QuartoId == quartoId);
+            Entidades.Quarto quartoBusca = _context.Quartos.ToList().Find(q => q.QuartoId == quartoId);
             QuartoModelo quartoModelo = new QuartoModelo
             {
                 QuartoId = quartoBusca.QuartoId,
@@ -28,7 +38,7 @@ namespace HMS_Techer.Servicos.Quarto
             };
             return quartoModelo;
         }
-        public static void MostrarQuarto(int quartoId)
+        /*public static void MostrarQuarto(int quartoId)
         {
             QuartoModelo quartoBusca = BuscarQuarto(quartoId);
             if (quartoBusca != null)
@@ -37,8 +47,9 @@ namespace HMS_Techer.Servicos.Quarto
             }
             else
                 Console.WriteLine("Quarto invalido!");
-        }
-        public static void ListarQuartos()
+        }*/
+
+        /*public static void ListarQuartos()
         {
             List<QuartoModelo> quartosModelo = new List<QuartoModelo>();
             foreach (Entidades.Quarto quarto in DadosLocais.Quartos)
@@ -53,14 +64,14 @@ namespace HMS_Techer.Servicos.Quarto
 
             foreach (QuartoModelo quartoModelo in quartosModelo)
                 Console.WriteLine(quartoModelo);
-        }
+        }*/
 
-        public static void ListarQuartosPorSituacao(int situacaoId)
+        public void ListarQuartosPorSituacao(int situacaoId)
         {
             List<QuartoModelo> quartosModelo = new List<QuartoModelo>();
             foreach (Entidades.Quarto quarto in DadosLocais.Quartos)
             {
-                if (quarto.Situacao.SituacaoId == situacaoId)
+                if (quarto.Situacao.SituacaoQuartoId == situacaoId)
                 {
                     quartosModelo.Add(new QuartoModelo
                     {
@@ -91,7 +102,7 @@ namespace HMS_Techer.Servicos.Quarto
             if(id == 4)
                 descricao = "Em Manutenção";
 
-            return new SituacaoQuarto { SituacaoId = id, Descricao = descricao };
+            return new SituacaoQuarto { SituacaoQuartoId = id, Descricao = descricao };
         }
 
         public static TipoQuarto ParseTipoQuarto(int id)
@@ -117,7 +128,11 @@ namespace HMS_Techer.Servicos.Quarto
                 valor = 250;
             }
 
-            return new TipoQuarto { TipoId = id, Descricao = descricao, Valor = valor };
+            return new TipoQuarto { TipoQuartoId = id, Descricao = descricao, Valor = valor };
+        }
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync()) > 0;
         }
 
         public static void AlterarSituacao(int quartoId, SituacaoQuarto situacaoQuarto)
@@ -125,7 +140,7 @@ namespace HMS_Techer.Servicos.Quarto
             DadosLocais.Quartos.Find(a => a.QuartoId == quartoId).Situacao = situacaoQuarto;
         }
 
-        public static void PrimeiraInstanciaQuartos()
+       /* public static void PrimeiraInstanciaQuartos()
         {
             //Instancia inicial dos quartos solteiro
             for (int i = 1; i <= 20; i++)
@@ -186,7 +201,7 @@ namespace HMS_Techer.Servicos.Quarto
                     }
                 });
             }
-        }
+        }*/
 
     }
 }

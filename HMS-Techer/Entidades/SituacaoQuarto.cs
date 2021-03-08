@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HMS_Techer.Entidades
 {
-    class SituacaoQuarto
+    public class SituacaoQuarto
     {
         /*
          * 1 - Desocupado / Livre
@@ -12,7 +12,12 @@ namespace HMS_Techer.Entidades
          * 3 - Reservado
          * 4 - Em Manutenção
          */
-        public int SituacaoId { get; set; }
+        public SituacaoQuarto()
+        {
+
+        }
+
+        public int SituacaoQuartoId { get; set; }
         public string Descricao { get; set; }
     }
 }

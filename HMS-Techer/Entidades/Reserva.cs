@@ -4,20 +4,21 @@ using System.Text;
 
 namespace HMS_Techer.Entidades
 {
-    class Reserva
+    public class Reserva
     {
         public int ReservaId { get; set; }
         public DateTime DataCriacao { get; set; }
-        public DateTime DataCheckIn { get; set; }
-        public DateTime DataCheckOut { get; set; }
-        public Servicos.Cliente.Modelos.ClienteFormularioModelo Cliente { get; set; }
-        public List<Entidades.Cliente> Hospedes { get; set; } = new List<Cliente>(); 
-        public string HospedesJSON { get; set; }
-        public Servicos.Quarto.QuartoModelo Quarto { get; set; }
-        public int QuartoSituacaoID { get; set; }
-        public double ValorDiarias { get; set; }
-        public double TaxasConsumo { get; set; }
-        public double ValorFinal { get; set; }
+        public DateTime? CheckIn { get; set; }
+        public DateTime? CheckOut { get; set; }
+        public string CpfReserva { get; set; }
+        public string? HospedesJson { get; set; }
+        public int QuartoId { get; set; }
+        public double? ValorDiarias { get; set; }
+        public double? TaxasConsumo { get; set; }
+        public double? ValorFinal { get; set; }
+
+        public virtual Cliente ClienteReserva { get; set; }
+        public virtual Quarto Quarto { get; set; }
 
     }
 }

@@ -9,7 +9,7 @@ namespace HMS_Techer.Servicos.Reserva
     {
         public static bool CriarNovaReserva(Modelos.ReservaFormularioModelo reservaFormularioModelo)
         {
-            var quartoBusca = Quarto.QuartoServico.BuscarQuarto(reservaFormularioModelo.QuartoNumero);
+            var quartoBusca = Quarto.QuartoService.BuscarQuarto(reservaFormularioModelo.QuartoNumero);
             var clienteBusca = Cliente.ClienteServico.BuscarCliente(reservaFormularioModelo.ClienteCpf);
 
             if (quartoBusca.Situacao.SituacaoId == 1 && clienteBusca != null)
@@ -179,7 +179,7 @@ namespace HMS_Techer.Servicos.Reserva
                     reserva.Hospedes.Add(hospede1);
                     reserva.Hospedes.Add(hospede2);
                 }
-                reserva.Quarto.Situacao = Servicos.Quarto.QuartoServico.ParseSituacao(reserva.QuartoSituacaoID);
+                reserva.Quarto.Situacao = Servicos.Quarto.QuartoService.ParseSituacao(reserva.QuartoSituacaoID);
             }
         }
         public static bool ReservaValidaOut(int reservaId)
