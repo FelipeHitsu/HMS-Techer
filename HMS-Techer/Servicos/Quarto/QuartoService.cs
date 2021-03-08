@@ -14,14 +14,14 @@ namespace HMS_Techer.Servicos.Quarto
         public static QuartoModelo BuscarQuarto(int quartoId)
         {
             var context = new HmsTecherContext();
-            Entidades.Quarto quartoBusca = context.Quarto.ToList().Find(q => q.QuartoId == quartoId);
-            QuartoModelo quartoModelo = new QuartoModelo
-            {
-                QuartoId = quartoBusca.QuartoId,
-                Tipo = quartoBusca.Tipo,
-                Situacao = quartoBusca.Situacao
-            };
-            return quartoModelo;
+            var quarto = context.Quarto.Where(q => q.QuartoId == quartoId)
+                .Select(q => new QuartoModelo
+                {
+                    QuartoId = q.QuartoId,
+                    Tipo = q.Tipo,
+                    Situacao = q.Situacao
+                }).FirstOrDefault();
+            return quarto;
         }
 
         public static List<QuartoModelo> ListarQuartosPorSituacao(int situacaoId)
@@ -48,9 +48,12 @@ namespace HMS_Techer.Servicos.Quarto
             return (await _context.SaveChangesAsync()) > 0;
         }*/
 
-        public static void AlterarSituacao(int quartoId, SituacaoQuarto situacaoQuarto)
+        public static void AlterarSituacao(int quartoId, int situacaoQuartoId)
         {
-            DadosLocais.Quartos.Find(a => a.QuartoId == quartoId).Situacao = situacaoQuarto;
+            var context = new HmsTecherContext();
+            var tmp = context.Quarto.Where(q => q.QuartoId == quartoId).FirstOrDefault();
+            tmp.SituacaoId = situacaoQuartoId;
+            context.SaveChanges();
         }
 
     }
