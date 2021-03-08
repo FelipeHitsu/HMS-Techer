@@ -7,7 +7,7 @@ namespace HMS_Techer.Servicos.Reserva
 {
     class ReservaServico
     {
-        public static bool CriarNovaReserva(Modelos.ReservaFormularioModelo reservaFormularioModelo)
+        /*public static bool CriarNovaReserva(Modelos.ReservaFormularioModelo reservaFormularioModelo)
         {
             var quartoBusca = Quarto.QuartoService.BuscarQuarto(reservaFormularioModelo.QuartoNumero);
             var clienteBusca = Cliente.ClienteServico.BuscarCliente(reservaFormularioModelo.ClienteCpf);
@@ -235,6 +235,6 @@ namespace HMS_Techer.Servicos.Reserva
             };
 
             return quartoReserva;
-        }
+        }*/
     }
 }

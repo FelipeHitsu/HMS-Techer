@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace HMS_Techer.Entidades
@@ -10,7 +11,7 @@ namespace HMS_Techer.Entidades
         {
 
         }
-
+        [Key]
         public string Cpf { get; set; }
         public string NomeCompleto { get; set; }
         public DateTime DataNascimento { get; set; }

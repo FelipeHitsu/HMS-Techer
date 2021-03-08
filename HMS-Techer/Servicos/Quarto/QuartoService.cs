@@ -5,31 +5,16 @@ using HMS_Techer.Entidades;
 using HMS_Techer.Dados;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace HMS_Techer.Servicos.Quarto
 {
     class QuartoService
     {
-        private readonly HmsTecherContext _context;
-
-        public QuartoService(HmsTecherContext context)
+        public static QuartoModelo BuscarQuarto(int quartoId)
         {
-            _context = context;
-        }
-
-        /*public static void CriarQuarto(QuartoModelo modeloQuarto)
-        {
-            DadosLocais.Quartos.Add(new Entidades.Quarto
-            {
-                QuartoId = modeloQuarto.QuartoId,
-                Tipo = modeloQuarto.Tipo,
-                Situacao = new SituacaoQuarto { SituacaoId = 1, Descricao = "Livre" }
-            });
-        }*/
-
-        public QuartoModelo BuscarQuarto(int quartoId)
-        {
-            Entidades.Quarto quartoBusca = _context.Quartos.ToList().Find(q => q.QuartoId == quartoId);
+            var context = new HmsTecherContext();
+            Entidades.Quarto quartoBusca = context.Quarto.ToList().Find(q => q.QuartoId == quartoId);
             QuartoModelo quartoModelo = new QuartoModelo
             {
                 QuartoId = quartoBusca.QuartoId,
@@ -38,170 +23,35 @@ namespace HMS_Techer.Servicos.Quarto
             };
             return quartoModelo;
         }
-        /*public static void MostrarQuarto(int quartoId)
+
+        public static List<QuartoModelo> ListarQuartosPorSituacao(int situacaoId)
         {
-            QuartoModelo quartoBusca = BuscarQuarto(quartoId);
-            if (quartoBusca != null)
-            {
-                Console.WriteLine(System.Environment.NewLine + quartoBusca);
-            }
-            else
-                Console.WriteLine("Quarto invalido!");
-        }*/
+            var context = new HmsTecherContext();
+            var quartos = context.Quarto
+                .AsQueryable()
+                .Include(c => c.Situacao)
+                .Include(c => c.Tipo)
+                .Where(q => q.Situacao.SituacaoQuartoId == situacaoId)
+                .OrderBy(q => q.QuartoId)
+                .Select(q => new QuartoModelo {
+                    QuartoId = q.QuartoId,
+                    Tipo = q.Tipo,
+                    Situacao = q.Situacao
+                })
+                .ToList();
 
-        /*public static void ListarQuartos()
-        {
-            List<QuartoModelo> quartosModelo = new List<QuartoModelo>();
-            foreach (Entidades.Quarto quarto in DadosLocais.Quartos)
-            {
-                quartosModelo.Add(new QuartoModelo
-                {
-                    QuartoId = quarto.QuartoId,
-                    Tipo = quarto.Tipo,
-                    Situacao = quarto.Situacao
-                });
-            }
-
-            foreach (QuartoModelo quartoModelo in quartosModelo)
-                Console.WriteLine(quartoModelo);
-        }*/
-
-        public void ListarQuartosPorSituacao(int situacaoId)
-        {
-            List<QuartoModelo> quartosModelo = new List<QuartoModelo>();
-            foreach (Entidades.Quarto quarto in DadosLocais.Quartos)
-            {
-                if (quarto.Situacao.SituacaoQuartoId == situacaoId)
-                {
-                    quartosModelo.Add(new QuartoModelo
-                    {
-                        QuartoId = quarto.QuartoId,
-                        Tipo = quarto.Tipo,
-                        Situacao = quarto.Situacao
-                    });
-                }
-            }
-
-            foreach (QuartoModelo quartoModelo in quartosModelo)
-                Console.WriteLine(quartoModelo);
+            return quartos;
         }
 
-        public static SituacaoQuarto ParseSituacao(int id)
-        {
-            string descricao = "";
-
-            if (id == 1)
-                descricao = "Livre";
-
-            if (id == 2)
-                descricao = "Ocupado";
-
-            if (id == 3)
-                descricao = "Reservado";
-
-            if(id == 4)
-                descricao = "Em Manutenção";
-
-            return new SituacaoQuarto { SituacaoQuartoId = id, Descricao = descricao };
-        }
-
-        public static TipoQuarto ParseTipoQuarto(int id)
-        {
-            string descricao = "";
-            double valor = 0;
-
-            if(id == 1)
-            {
-                descricao = "Solteiro";
-                valor = 150;
-            }
-
-            if (id == 2)
-            {
-                descricao = "Duplo";
-                valor = 200;
-            }
-
-            if(id == 3)
-            {
-                descricao = "Casal";
-                valor = 250;
-            }
-
-            return new TipoQuarto { TipoQuartoId = id, Descricao = descricao, Valor = valor };
-        }
-        public async Task<bool> SaveChangesAsync()
+        /*public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync()) > 0;
-        }
+        }*/
 
         public static void AlterarSituacao(int quartoId, SituacaoQuarto situacaoQuarto)
         {
             DadosLocais.Quartos.Find(a => a.QuartoId == quartoId).Situacao = situacaoQuarto;
         }
-
-       /* public static void PrimeiraInstanciaQuartos()
-        {
-            //Instancia inicial dos quartos solteiro
-            for (int i = 1; i <= 20; i++)
-            {
-                DadosLocais.Quartos.Add(new Entidades.Quarto
-                {
-                    QuartoId = i,
-                    Situacao = new SituacaoQuarto
-                    {
-                        SituacaoId = 1,
-                        Descricao = "Livre"
-                    },
-                    Tipo = new TipoQuarto
-                    {
-                        TipoId = 1,
-                        Descricao = "Solteiro",
-                        Valor = 150
-                    }
-                });
-            }
-
-            //Instancia incial quartos duplos
-            for (int i = 21; i <= 30; i++)
-            {
-                DadosLocais.Quartos.Add(new Entidades.Quarto
-                {
-                    QuartoId = i,
-                    Situacao = new SituacaoQuarto
-                    {
-                        SituacaoId = 1,
-                        Descricao = "Livre"
-                    },
-                    Tipo = new TipoQuarto
-                    {
-                        TipoId = 2,
-                        Descricao = "Duplo",
-                        Valor = 200
-                    }
-                });
-            }
-
-            //Instancia incial quartos Casal
-            for (int i = 31; i <= 50; i++)
-            {
-                DadosLocais.Quartos.Add(new Entidades.Quarto
-                {
-                    QuartoId = i,
-                    Situacao = new SituacaoQuarto
-                    {
-                        SituacaoId = 1,
-                        Descricao = "Livre"
-                    },
-                    Tipo = new TipoQuarto
-                    {
-                        TipoId = 3,
-                        Descricao = "Casal",
-                        Valor = 250
-                    }
-                });
-            }
-        }*/
 
     }
 }

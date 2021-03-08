@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HMS_Techer.Servicos.Quarto;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -43,6 +44,7 @@ namespace HMS_Techer.Views
             Console.ForegroundColor = ConsoleColor.Red;
 
             char escolha = char.Parse(Console.ReadLine());
+            
 
             Console.BackgroundColor = originalBackground;
             Console.ForegroundColor = originalForeground;
@@ -51,8 +53,9 @@ namespace HMS_Techer.Views
             {
                 Console.Clear();
                 Tela.Header();
-                Servicos.Quarto.QuartoService.ListarQuartosPorSituacao(2);
-                
+                var quartos = QuartoService.ListarQuartosPorSituacao(2);
+                foreach(QuartoModelo quarto in quartos)
+                    Console.WriteLine(quarto);
 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
                 Tela.Footer(Console.CursorLeft, Console.CursorTop);
@@ -63,8 +66,11 @@ namespace HMS_Techer.Views
             {
                 Console.Clear();
                 Tela.Header();
-                Servicos.Quarto.QuartoService.ListarQuartosPorSituacao(1);
                 
+                var quartos = QuartoService.ListarQuartosPorSituacao(1);
+                foreach (QuartoModelo quarto in quartos)
+                    Console.WriteLine(quarto);
+
 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
                 Tela.Footer(Console.CursorLeft,Console.CursorTop);
@@ -75,8 +81,11 @@ namespace HMS_Techer.Views
             {
                 Console.Clear();
                 Tela.Header();
-                Servicos.Quarto.QuartoService.ListarQuartosPorSituacao(3);
                 
+                var quartos = QuartoService.ListarQuartosPorSituacao(3);
+                foreach (QuartoModelo quarto in quartos)
+                    Console.WriteLine(quarto);
+
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
                 Tela.Footer(Console.CursorLeft, Console.CursorTop);
                 Console.ReadLine();
@@ -86,8 +95,11 @@ namespace HMS_Techer.Views
             {
                 Console.Clear();
                 Tela.Header();
-                Servicos.Quarto.QuartoService.ListarQuartosPorSituacao(4);
-              
+                
+                var quartos = QuartoService.ListarQuartosPorSituacao(4);
+                foreach (QuartoModelo quarto in quartos)
+                    Console.WriteLine(quarto);
+
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
                 Tela.Footer(Console.CursorLeft, Console.CursorTop);
                 Console.ReadLine();

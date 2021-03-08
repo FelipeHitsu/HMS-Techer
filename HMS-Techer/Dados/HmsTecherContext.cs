@@ -8,16 +8,12 @@ namespace HMS_Techer.Dados
 {
     public class HmsTecherContext : DbContext
     {
-        public HmsTecherContext(DbContextOptions<HmsTecherContext> optionsBuilder):base(optionsBuilder)
-        {
 
-        }
-
-        public virtual DbSet<Cliente> Clientes { get; set; }
-        public virtual DbSet<Quarto> Quartos { get; set; }
-        public virtual DbSet<Reserva> Reservas { get; set; }
-        public virtual DbSet<SituacaoQuarto> SituacaoQuartos { get; set; }
-        public virtual DbSet<TipoQuarto> TipoQuartos { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Quarto> Quarto { get; set; }
+        public virtual DbSet<Reserva> Reserva { get; set; }
+        public virtual DbSet<SituacaoQuarto> SituacaoQuarto { get; set; }
+        public virtual DbSet<TipoQuarto> TipoQuarto { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -22,7 +22,7 @@ namespace HMS_Techer.Views
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
 
-            Console.Write("\t\t Insira o Número da Reserva: ");
+            /*Console.Write("\t\t Insira o Número da Reserva: ");
             int numeroReserva = int.Parse(Console.ReadLine());
 
             if (!Servicos.Reserva.ReservaServico.ReservaValidaOut(numeroReserva))
@@ -40,7 +40,7 @@ namespace HMS_Techer.Views
             ConsolePrint.Print("\t\t              CHECKOUT REALIZADO !          ", ConsoleColor.Green, ConsoleColor.DarkGray);
             Console.WriteLine();
 
-            Servicos.Reserva.ReservaServico.FazerCheckOut(numeroReserva, taxasConsumo);
+            Servicos.Reserva.ReservaServico.FazerCheckOut(numeroReserva, taxasConsumo);*/
 
             Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
             Tela.Footer(Console.CursorLeft, Console.CursorTop);

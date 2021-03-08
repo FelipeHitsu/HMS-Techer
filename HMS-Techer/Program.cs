@@ -8,7 +8,7 @@ namespace HMS_Techer
 
         static void Main(string[] args)
         {
-            Dados.DadosServico.CarregarDados();
+            //Dados.DadosServico.CarregarDados();
             Views.Tela.Carregar();
             bool aplicacaoFinalizada = false;
             int estadoMenu = -1;
@@ -56,7 +56,7 @@ namespace HMS_Techer
 
             }
 
-            Dados.DadosServico.SalvarTodosOsDados();
+            //Dados.DadosServico.SalvarTodosOsDados();
             Console.Clear();
             Views.Tela.Header();
             Console.WriteLine();

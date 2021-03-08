@@ -22,7 +22,7 @@ namespace HMS_Techer.Views
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
 
-            Console.Write("\t\t Insira o Número da Reserva: ");
+            /*Console.Write("\t\t Insira o Número da Reserva: ");
             int reservaId = int.Parse(Console.ReadLine());
 
             var quartoReserva = Servicos.Reserva.ReservaServico.QuartoDaReserva(reservaId);
@@ -118,7 +118,7 @@ namespace HMS_Techer.Views
                     Console.ReadLine();
                     return (int)Views.Telas.CheckIn;
                 }
-            }
+            }*/
 
             Console.Write("\t\t Pressiona qualquer tecla para continuar");
             Console.ReadLine();
