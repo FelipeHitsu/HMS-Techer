@@ -8,8 +8,8 @@ namespace HMS_Techer.Servicos.Reserva.Modelos
     {
         public int ReservaId { get; set; }
         public DateTime DataCriacao { get; set; }
-        public Servicos.Cliente.Modelos.ClienteFormularioModelo Cliente { get; set; }
-        public Servicos.Quarto.QuartoModelo Quarto { get; set; }
+        public Servicos.Cliente.Modelos.ClienteFormularioModel Cliente { get; set; }
+        public Servicos.Quarto.QuartoModel Quarto { get; set; }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

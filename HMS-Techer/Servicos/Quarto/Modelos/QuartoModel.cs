@@ -6,7 +6,7 @@ using HMS_Techer.Entidades;
 
 namespace HMS_Techer.Servicos.Quarto
 {
-    public class QuartoModelo
+    public class QuartoModel
     {
         public int QuartoId { get; set; }
         public TipoQuarto Tipo { get; set; }

@@ -22,9 +22,20 @@ namespace HMS_Techer.Views
             Console.WriteLine();
             Console.Write("\t\t     Insira o CPF: ");
             string cpf = Console.ReadLine();
+            
+            if(cpf == null)
+            {
+                Console.WriteLine();
+                ConsolePrint.Print("\t\t              CAMPO NÃO PREENCHIDO !     ", ConsoleColor.Red, ConsoleColor.DarkGray);
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("\t\t Pressione qualquer tecla para retornar ao menu...");
+                Console.ReadLine();
+                return (int)Views.Telas.BuscarCliente;
+            }
 
-            var resultadoBusca = Servicos.Cliente.ClienteServico.BuscarCliente(cpf);
-
+            var resultadoBusca = Servicos.Cliente.ClienteService.BuscarCliente(cpf);
+            
             if(resultadoBusca != null)
             {
                 Console.WriteLine(resultadoBusca);

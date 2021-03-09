@@ -23,7 +23,7 @@ namespace HMS_Techer.Views
             Console.WriteLine();
 
            
-            /*var formularioReserva = new Servicos.Reserva.Modelos.ReservaFormularioModelo();
+            var formularioReserva = new Servicos.Reserva.Modelos.ReservaFormularioModelo();
 
             Console.Write("\t\t Insira o Número do Quarto a reservar: ");
             int quartoSelecionado = int.Parse(Console.ReadLine());
@@ -35,7 +35,7 @@ namespace HMS_Techer.Views
             formularioReserva.ClienteCpf = cpfCadastro;
 
 
-            if (Servicos.Reserva.ReservaServico.CriarNovaReserva(formularioReserva))
+            /*if (Servicos.Reserva.ReservaServico.CriarNovaReserva(formularioReserva))
             {
                 Console.WriteLine();
                 ConsolePrint.Print("\t\t              RESERVA REALIZADA !          ", ConsoleColor.Green, ConsoleColor.DarkGray);

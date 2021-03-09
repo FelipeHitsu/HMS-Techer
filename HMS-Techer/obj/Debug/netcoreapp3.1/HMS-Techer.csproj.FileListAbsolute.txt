@@ -30,7 +30,6 @@ F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\HMS-Tech
 F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\HMS-Techer.runtimeconfig.dev.json
 F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\HMS-Techer.dll
 F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\HMS-Techer.pdb
-F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.csprojAssemblyReference.cache
 F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.AssemblyInfoInputs.cache
 F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.AssemblyInfo.cs
 F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.csproj.CoreCompileInputs.cache
@@ -88,3 +87,4 @@ F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\runtimes
 F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.csproj.CopyComplete
+F:\Documentos\Projetos\C#\HMS-Techer\HMS-Techer\obj\Debug\netcoreapp3.1\HMS-Techer.csprojAssemblyReference.cache

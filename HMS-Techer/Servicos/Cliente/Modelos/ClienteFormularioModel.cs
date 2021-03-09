@@ -3,7 +3,7 @@ using HMS_Techer.Exceptions;
 
 namespace HMS_Techer.Servicos.Cliente.Modelos
 {
-    public class ClienteFormularioModelo
+    public class ClienteFormularioModel
     {
 
         public string Cpf { get; set; }
@@ -31,7 +31,7 @@ namespace HMS_Techer.Servicos.Cliente.Modelos
                 if (string.IsNullOrEmpty(TelefoneCelular) || TelefoneCelular.Length != 11)
                     throw new MyException("Telefone Invalido ou não preenchido!");
 
-                var cpfBusca = ClienteServico.BuscarCliente(Cpf);
+                var cpfBusca = ClienteService.BuscarCliente(Cpf);
 
                 if (cpfBusca != null)
                     throw new MyException("CPF ja cadastrado !");

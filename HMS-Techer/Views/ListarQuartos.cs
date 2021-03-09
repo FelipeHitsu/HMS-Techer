@@ -54,7 +54,7 @@ namespace HMS_Techer.Views
                 Console.Clear();
                 Tela.Header();
                 var quartos = QuartoService.ListarQuartosPorSituacao(2);
-                foreach(QuartoModelo quarto in quartos)
+                foreach(QuartoModel quarto in quartos)
                     Console.WriteLine(quarto);
 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
@@ -68,7 +68,7 @@ namespace HMS_Techer.Views
                 Tela.Header();
                 
                 var quartos = QuartoService.ListarQuartosPorSituacao(1);
-                foreach (QuartoModelo quarto in quartos)
+                foreach (QuartoModel quarto in quartos)
                     Console.WriteLine(quarto);
 
 
@@ -83,7 +83,7 @@ namespace HMS_Techer.Views
                 Tela.Header();
                 
                 var quartos = QuartoService.ListarQuartosPorSituacao(3);
-                foreach (QuartoModelo quarto in quartos)
+                foreach (QuartoModel quarto in quartos)
                     Console.WriteLine(quarto);
 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
@@ -97,7 +97,7 @@ namespace HMS_Techer.Views
                 Tela.Header();
                 
                 var quartos = QuartoService.ListarQuartosPorSituacao(4);
-                foreach (QuartoModelo quarto in quartos)
+                foreach (QuartoModel quarto in quartos)
                     Console.WriteLine(quarto);
 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");

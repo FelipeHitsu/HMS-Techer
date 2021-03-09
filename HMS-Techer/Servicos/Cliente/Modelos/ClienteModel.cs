@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HMS_Techer.Servicos.Cliente.Modelos
 {
-    class ClienteModelo
+    class ClienteModel
     {
         public string NomeCompleto { get; set; }
         public DateTime DataNascimento { get; set; }
@@ -15,17 +15,17 @@ namespace HMS_Techer.Servicos.Cliente.Modelos
         public override string ToString()
         {
             return System.Environment.NewLine
-                + "Nome Completo: "
+                + "\t\t     Nome Completo: "
                 + NomeCompleto
                 + System.Environment.NewLine
-                + "Idade: "
+                + "\t\t     Idade: "
                 + Idade
                 + " anos"
                 + System.Environment.NewLine
-                + "Email: "
+                + "\t\t     Email: "
                 + Email
                 + System.Environment.NewLine
-                + "Telefone Celular: "
+                + "\t\t     Telefone Celular: "
                 + TelefoneCelular
                 + System.Environment.NewLine;
         }

@@ -36,7 +36,7 @@ namespace HMS_Techer.Views
             Console.Write("\t\t Telefone Celular (11 digitos numero e DDD): ");
             string telefoneCadastro = Console.ReadLine();
 
-            var novoCadastro = new Servicos.Cliente.Modelos.ClienteFormularioModelo
+            var novoCadastro = new Servicos.Cliente.Modelos.ClienteFormularioModel
             {
                 Cpf = cpfCadastro,
                 NomeCompleto = nomeCadastro,
@@ -53,7 +53,7 @@ namespace HMS_Techer.Views
             }
 
 
-            Servicos.Cliente.ClienteServico.CadastrarCliente(novoCadastro);
+            Servicos.Cliente.ClienteService.CadastrarCliente(novoCadastro);
 
             Console.WriteLine();
             ConsolePrint.Print("\t\t     CADASTRO REALIZADO COM SUCESSO          ", ConsoleColor.Green, ConsoleColor.Gray);

@@ -11,11 +11,11 @@ namespace HMS_Techer.Servicos.Quarto
 {
     class QuartoService
     {
-        public static QuartoModelo BuscarQuarto(int quartoId)
+        public static QuartoModel BuscarQuarto(int quartoId)
         {
             var context = new HmsTecherContext();
             var quarto = context.Quarto.Where(q => q.QuartoId == quartoId)
-                .Select(q => new QuartoModelo
+                .Select(q => new QuartoModel
                 {
                     QuartoId = q.QuartoId,
                     Tipo = q.Tipo,
@@ -23,8 +23,7 @@ namespace HMS_Techer.Servicos.Quarto
                 }).FirstOrDefault();
             return quarto;
         }
-
-        public static List<QuartoModelo> ListarQuartosPorSituacao(int situacaoId)
+        public static List<QuartoModel> ListarQuartosPorSituacao(int situacaoId)
         {
             var context = new HmsTecherContext();
             var quartos = context.Quarto
@@ -33,7 +32,7 @@ namespace HMS_Techer.Servicos.Quarto
                 .Include(c => c.Tipo)
                 .Where(q => q.Situacao.SituacaoQuartoId == situacaoId)
                 .OrderBy(q => q.QuartoId)
-                .Select(q => new QuartoModelo {
+                .Select(q => new QuartoModel {
                     QuartoId = q.QuartoId,
                     Tipo = q.Tipo,
                     Situacao = q.Situacao
@@ -42,7 +41,6 @@ namespace HMS_Techer.Servicos.Quarto
 
             return quartos;
         }
-
         /*public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync()) > 0;
@@ -55,6 +53,5 @@ namespace HMS_Techer.Servicos.Quarto
             tmp.SituacaoId = situacaoQuartoId;
             context.SaveChanges();
         }
-
     }
 }
