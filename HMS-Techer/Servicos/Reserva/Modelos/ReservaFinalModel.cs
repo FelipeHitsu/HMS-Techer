@@ -12,8 +12,8 @@ namespace HMS_Techer.Servicos.Reserva.Modelos
         public DateTime DataCriacao { get; set; }
         public DateTime DataCheckIn { get; set; }
         public DateTime DataCheckOut { get; set; }
-        public Servicos.Cliente.Modelos.ClienteFormularioModel Cliente { get; set; }
-        public List<Entidades.Cliente> Hospedes { get; set; }
+        public Cliente.Modelos.ClienteFormularioModel Cliente { get; set; }
+        public List<Cliente.Modelos.ClienteFormularioModel> Hospedes { get; set; }
         public string HospedesJSON { get; set; }
         public Servicos.Quarto.QuartoModel Quarto { get; set; }
         public double ValorDiarias { get; set; }
@@ -37,9 +37,9 @@ namespace HMS_Techer.Servicos.Reserva.Modelos
 
             sb.AppendLine("\t\t     Hospedes: ");
             
-            foreach(Entidades.Cliente cliente in Hospedes)
+            foreach(Cliente.Modelos.ClienteFormularioModel cliente in Hospedes)
             {
-                sb.AppendLine(Servicos.Cliente.ClienteService.BuscarCliente(cliente.Cpf).ToString());
+                sb.AppendLine(cliente.ToString());
             }
 
             sb.Append("\t\t     Check in Realizado em: ");

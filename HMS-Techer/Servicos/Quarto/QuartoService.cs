@@ -41,16 +41,21 @@ namespace HMS_Techer.Servicos.Quarto
 
             return quartos;
         }
-        /*public async Task<bool> SaveChangesAsync()
-        {
-            return (await _context.SaveChangesAsync()) > 0;
-        }*/
 
         public static void AlterarSituacao(int quartoId, int situacaoQuartoId)
         {
             var context = new HmsTecherContext();
             var tmp = context.Quarto.Where(q => q.QuartoId == quartoId).FirstOrDefault();
             tmp.SituacaoId = situacaoQuartoId;
+            context.SaveChanges();
+        }
+
+        public static void ResetQuartosEmManutencao()
+        {
+            var context = new HmsTecherContext();
+            var quartosEmManutencao = context.Quarto.Where(q => q.SituacaoId == 4).ToList();
+            foreach (Entidades.Quarto q in quartosEmManutencao)
+                q.SituacaoId = 1;
             context.SaveChanges();
         }
     }

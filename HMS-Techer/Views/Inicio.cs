@@ -16,6 +16,7 @@ namespace HMS_Techer.Views
             Console.WriteLine("\t\t\t\t Bem Vindo");
             Console.Write("\t\t\t Insira seu nome: ");
             Dados.DadosLocais.NomeFuncionario = Console.ReadLine();
+            
 
             return (int)Views.Telas.MenuPrincipal;
         }

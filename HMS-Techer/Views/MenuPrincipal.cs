@@ -33,6 +33,7 @@ namespace HMS_Techer.Views
             ConsolePrint.Print("\t\t     5 - Realizar um check in                " + System.Environment.NewLine, ConsoleColor.DarkCyan, ConsoleColor.Gray);
             ConsolePrint.Print("\t\t     6 - Realizar um check out               " + System.Environment.NewLine, ConsoleColor.DarkCyan, ConsoleColor.Gray);
             ConsolePrint.Print("\t\t     7 - Encerrar o sistema                  " + System.Environment.NewLine, ConsoleColor.DarkCyan, ConsoleColor.Gray);
+            ConsolePrint.Print("\t\t     7 - Liberar Quartos em Manutenção       " + System.Environment.NewLine, ConsoleColor.DarkCyan, ConsoleColor.Gray);
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
@@ -63,6 +64,11 @@ namespace HMS_Techer.Views
                 return (int)Views.Telas.CheckOut;
             if (escolha == 7)
                 return (int)Views.Telas.Finalizar;
+            if(escolha == 8)
+            {
+                Servicos.Quarto.QuartoService.ResetQuartosEmManutencao();
+                return (int)Views.Telas.MenuPrincipal;
+            }
 
             else
                 return (int)Views.Telas.MenuPrincipal;
