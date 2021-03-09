@@ -41,7 +41,25 @@ namespace HMS_Techer.Servicos.Cliente
                 }).ToList();
             return clientes;
         }
-        
+        public static ClienteFormularioModel BuscarClienteCompleto(string cpf)
+        {
+            var context = new HmsTecherContext();
+            var clienteBusca = context.Cliente
+                .Where(c => c.Cpf == cpf)
+                .Select(c => new ClienteFormularioModel
+                {
+                    Cpf = c.Cpf,
+                    NomeCompleto = c.NomeCompleto,
+                    DataNascimento = c.DataNascimento,
+                    Email = c.Email,
+                    TelefoneCelular = c.TelefoneCelular
+                }).FirstOrDefault();
+
+            if (clienteBusca == null)
+                return null;
+
+            return clienteBusca;
+        }
         public static ClienteModel BuscarCliente(string cpf)
         {
             var context = new HmsTecherContext();

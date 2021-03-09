@@ -22,8 +22,7 @@ namespace HMS_Techer.Views
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
 
-           
-            var formularioReserva = new Servicos.Reserva.Modelos.ReservaFormularioModelo();
+            var formularioReserva = new Servicos.Reserva.Modelos.ReservaFormularioModel();
 
             Console.Write("\t\t Insira o Número do Quarto a reservar: ");
             int quartoSelecionado = int.Parse(Console.ReadLine());
@@ -35,17 +34,17 @@ namespace HMS_Techer.Views
             formularioReserva.ClienteCpf = cpfCadastro;
 
 
-            /*if (Servicos.Reserva.ReservaServico.CriarNovaReserva(formularioReserva))
+            if (Servicos.Reserva.ReservaService.CriarNovaReserva(formularioReserva))
             {
                 Console.WriteLine();
                 ConsolePrint.Print("\t\t              RESERVA REALIZADA !          ", ConsoleColor.Green, ConsoleColor.DarkGray);
                 Console.WriteLine();
 
-                Servicos.Reserva.ReservaServico.MostrarUltimaReserva();
+                Servicos.Reserva.ReservaService.MostrarUltimaReserva();
 
                 Console.ReadLine();
                 return (int)Views.Telas.MenuPrincipal;
-            }*/
+            }
 
             Console.WriteLine();
             ConsolePrint.Print("\t\t              QUARTO INDISPONIVEL OU CLIENTE NÃO CADASTRADO !          ", ConsoleColor.Red, ConsoleColor.DarkGray);

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HMS_Techer.Servicos.Reserva.Modelos
 {
-    class ReservaRealizadaModelo
+    class ReservaRealizadaModel
     {
         public int ReservaId { get; set; }
         public DateTime DataCriacao { get; set; }

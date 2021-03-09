@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace HMS_Techer.Entidades
@@ -16,7 +17,7 @@ namespace HMS_Techer.Entidades
         {
 
         }
-
+        [Key]
         public int SituacaoQuartoId { get; set; }
         public string Descricao { get; set; }
     }

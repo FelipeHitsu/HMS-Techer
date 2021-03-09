@@ -4,10 +4,9 @@ using System.Text;
 
 namespace HMS_Techer.Servicos.Reserva.Modelos
 {
-    class ReservaFormularioModelo
+    class ReservaFormularioModel
     {
         public string ClienteCpf { get; set; }
         public int QuartoNumero { get; set; }
-
     }
 }
