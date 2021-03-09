@@ -23,6 +23,7 @@ namespace HMS_Techer.Servicos.Quarto
                 }).FirstOrDefault();
             return quarto;
         }
+        //Situacao quarto id - de int para ENUM
         public static List<QuartoModel> ListarQuartosPorSituacao(int situacaoId)
         {
             var context = new HmsTecherContext();

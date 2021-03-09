@@ -21,7 +21,6 @@ namespace HMS_Techer.Servicos.Reserva
 
                 context.Reserva.Add(new Entidades.Reserva
                 {
-                    ReservaId = context.Reserva.ToList().Count + 1,
                     DataCriacao = DateTime.Now,
                     CpfReserva = clienteBusca.Cpf,
                     QuartoId = quartoBusca.QuartoId
@@ -67,7 +66,7 @@ namespace HMS_Techer.Servicos.Reserva
                     Tipo = reserva.Quarto.Tipo
                 }
             };
-
+            //Return Model
             Console.WriteLine(reservaModelo);
         }
 
@@ -90,7 +89,7 @@ namespace HMS_Techer.Servicos.Reserva
             return true;
 
         }
-
+        //Repensar esse metodo 
         public static bool FazerCheckIn(int reservaId, string hospedeCpf1, string hospedeCpf2)
         {
             var context = new HmsTecherContext();
@@ -114,6 +113,7 @@ namespace HMS_Techer.Servicos.Reserva
         public static Modelos.ReservaFinalModel FazerCheckOut(int reservaId, double consumoETaxas)
         {
             var context = new HmsTecherContext();
+            //INstanciar o quarto situação e tipo na reserva via query
             var reserva = context.Reserva.Where(a => a.ReservaId == reservaId).FirstOrDefault();
             var quarto = context.Quarto.Where(q => q.QuartoId == reserva.QuartoId).Include(q => q.Tipo).FirstOrDefault();
 

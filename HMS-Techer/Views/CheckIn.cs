@@ -36,7 +36,7 @@ namespace HMS_Techer.Views
                 Console.ReadLine();
                 return (int)Views.Telas.CheckIn;
             }
-
+            //Repensar esse metodo
             var quartoReserva = Servicos.Reserva.ReservaService.QuartoDaReserva(reservaId);
 
             if (quartoReserva.Situacao.SituacaoQuartoId == 3 && quartoReserva.Tipo.TipoQuartoId == 1) // Quarto solteiro

@@ -8,15 +8,15 @@ namespace HMS_Techer
 
         static void Main(string[] args)
         {
-            //Dados.DadosServico.CarregarDados();
             Views.Tela.Carregar();
             bool aplicacaoFinalizada = false;
             int estadoMenu = -1;
+            //inicialização e criação de contextos
             while (!aplicacaoFinalizada)
             {
                 switch (estadoMenu)
                 {
-                    case (int)Views.Telas.Inicio:
+                    case (int)Views.Telas.Inicio: //Não precisa desse cast do int
                         estadoMenu = Views.Inicio.Run();
                         break;
 
@@ -56,7 +56,6 @@ namespace HMS_Techer
 
             }
 
-            //Dados.DadosServico.SalvarTodosOsDados();
             Console.Clear();
             Views.Tela.Header();
             Console.WriteLine();

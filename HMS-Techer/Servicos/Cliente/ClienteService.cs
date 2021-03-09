@@ -10,8 +10,11 @@ namespace HMS_Techer.Servicos.Cliente
 {
     class ClienteService
     {
+        //Retirar estatico trabalhar por instancia
+        //Cadastrar - Ja esta na service cliente
         public static void CadastrarCliente(ClienteFormularioModel clienteFormularioModel)
         {
+            //Sem estatico construtor da classe faz a referencia do contexto
             var context = new HmsTecherContext();
             context.Cliente.Add(new Entidades.Cliente
             {
@@ -41,6 +44,7 @@ namespace HMS_Techer.Servicos.Cliente
                 }).ToList();
             return clientes;
         }
+        //Validação no service
         public static ClienteFormularioModel BuscarClienteCompleto(string cpf)
         {
             var context = new HmsTecherContext();

@@ -28,7 +28,7 @@ namespace HMS_Techer.Views
             string nomeCadastro = Console.ReadLine();
 
             Console.Write("\t\t Data de Nascimento (dd/MM/yyyy): ");
-            DateTime dataNascimentoCadastro = DateTime.Parse(Console.ReadLine());
+            DateTime dataNascimentoCadastro = DateTime.Parse(Console.ReadLine()); // erro caso vazio
 
             Console.Write("\t\t Email : ");
             string emailCadastro = Console.ReadLine();

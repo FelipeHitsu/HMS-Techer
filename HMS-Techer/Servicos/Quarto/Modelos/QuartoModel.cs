@@ -9,6 +9,8 @@ namespace HMS_Techer.Servicos.Quarto
     public class QuartoModel
     {
         public int QuartoId { get; set; }
+
+        //Substituir a entidade por referencia ou por uma model
         public TipoQuarto Tipo { get; set; }
         public SituacaoQuarto Situacao { get; set; }
 
