@@ -11,7 +11,14 @@ namespace HMS_Techer.Servicos.Quarto
 {
     class QuartoService
     {
-        public static QuartoModel BuscarQuarto(int quartoId)
+        private readonly HmsTecherContext _context;
+
+        public QuartoService(HmsTecherContext context)
+        {
+            _context = context;
+        }
+
+        public QuartoModel BuscarQuarto(int quartoId)
         {
             var context = new HmsTecherContext();
             var quarto = context.Quarto.Where(q => q.QuartoId == quartoId)
@@ -24,14 +31,14 @@ namespace HMS_Techer.Servicos.Quarto
             return quarto;
         }
         //Situacao quarto id - de int para ENUM
-        public static List<QuartoModel> ListarQuartosPorSituacao(int situacaoId)
+        public List<QuartoModel> ListarQuartosPorSituacao(Quarto.SituacaoEnum situacao)
         {
             var context = new HmsTecherContext();
             var quartos = context.Quarto
                 .AsQueryable()
                 .Include(c => c.Situacao)
                 .Include(c => c.Tipo)
-                .Where(q => q.Situacao.SituacaoQuartoId == situacaoId)
+                .Where(q => q.Situacao.SituacaoQuartoId == (int)situacao)
                 .OrderBy(q => q.QuartoId)
                 .Select(q => new QuartoModel {
                     QuartoId = q.QuartoId,
@@ -43,20 +50,20 @@ namespace HMS_Techer.Servicos.Quarto
             return quartos;
         }
 
-        public static void AlterarSituacao(int quartoId, int situacaoQuartoId)
+        public void AlterarSituacao(int quartoId, Quarto.SituacaoEnum situacao)
         {
             var context = new HmsTecherContext();
-            var tmp = context.Quarto.Where(q => q.QuartoId == quartoId).FirstOrDefault();
-            tmp.SituacaoId = situacaoQuartoId;
+            var quarto = context.Quarto.Where(q => q.QuartoId == quartoId).FirstOrDefault();
+            quarto.SituacaoId = (int)situacao;
             context.SaveChanges();
         }
 
-        public static void ResetQuartosEmManutencao()
+        public void ResetQuartosEmManutencao()
         {
             var context = new HmsTecherContext();
-            var quartosEmManutencao = context.Quarto.Where(q => q.SituacaoId == 4).ToList();
+            var quartosEmManutencao = context.Quarto.Where(q => q.SituacaoId == (int)SituacaoEnum.Manutencao).ToList();
             foreach (Entidades.Quarto q in quartosEmManutencao)
-                q.SituacaoId = 1;
+                q.SituacaoId = (int)SituacaoEnum.Livre;
             context.SaveChanges();
         }
     }

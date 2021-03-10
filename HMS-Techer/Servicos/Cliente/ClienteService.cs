@@ -10,9 +10,17 @@ namespace HMS_Techer.Servicos.Cliente
 {
     class ClienteService
     {
+        private readonly HmsTecherContext _context;
+
+        public ClienteService(HmsTecherContext context)
+        {
+            _context = context;
+        }
+
+
         //Retirar estatico trabalhar por instancia
         //Cadastrar - Ja esta na service cliente
-        public static void CadastrarCliente(ClienteFormularioModel clienteFormularioModel)
+        public void CadastrarCliente(ClienteFormularioModel clienteFormularioModel)
         {
             //Sem estatico construtor da classe faz a referencia do contexto
             var context = new HmsTecherContext();
@@ -28,7 +36,7 @@ namespace HMS_Techer.Servicos.Cliente
             );
             context.SaveChanges();
         }
-        public static List<ClienteModel> ListarTodosOsClientes()
+        public List<ClienteModel> ListarTodosOsClientes()
         {
             var context = new HmsTecherContext();
             var clientes = context.Cliente
@@ -45,7 +53,7 @@ namespace HMS_Techer.Servicos.Cliente
             return clientes;
         }
         //Validação no service
-        public static ClienteFormularioModel BuscarClienteCompleto(string cpf)
+        public ClienteFormularioModel BuscarClienteCompleto(string cpf)
         {
             var context = new HmsTecherContext();
             var clienteBusca = context.Cliente
@@ -64,7 +72,7 @@ namespace HMS_Techer.Servicos.Cliente
 
             return clienteBusca;
         }
-        public static ClienteModel BuscarCliente(string cpf)
+        public ClienteModel BuscarCliente(string cpf)
         {
             var context = new HmsTecherContext();
             var clienteBusca = context.Cliente

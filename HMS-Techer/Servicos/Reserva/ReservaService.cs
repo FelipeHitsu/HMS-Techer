@@ -5,18 +5,30 @@ using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using HMS_Techer.Servicos.Quarto;
+using HMS_Techer.Servicos.Cliente;
 
 namespace HMS_Techer.Servicos.Reserva
 {
     class ReservaService
     {
-        public static bool CriarNovaReserva(Modelos.ReservaFormularioModel reservaFormularioModelo)
+        private readonly HmsTecherContext _context;
+        private readonly Cliente.ClienteService _clienteService;
+        private readonly Quarto.QuartoService _quartoService;
+
+        public ReservaService(HmsTecherContext context, ClienteService clienteService, QuartoService quartoService)
+        {
+            _context = context;
+            _clienteService = clienteService;
+            _quartoService = quartoService;
+        }
+
+        public bool CriarNovaReserva(Modelos.ReservaFormularioModel reservaFormularioModelo)
         {
             var context = new HmsTecherContext();
             var quartoBusca = context.Quarto.Where(q => q.QuartoId == reservaFormularioModelo.QuartoNumero).FirstOrDefault();
-            var clienteBusca = Cliente.ClienteService.BuscarClienteCompleto(reservaFormularioModelo.ClienteCpf);
+            var clienteBusca = _clienteService.BuscarClienteCompleto(reservaFormularioModelo.ClienteCpf);
 
-            if (quartoBusca.SituacaoId == 1 && clienteBusca != null)
+            if (quartoBusca.SituacaoId == (int)Quarto.SituacaoEnum.Livre && clienteBusca != null)
             {
 
                 context.Reserva.Add(new Entidades.Reserva
@@ -25,7 +37,7 @@ namespace HMS_Techer.Servicos.Reserva
                     CpfReserva = clienteBusca.Cpf,
                     QuartoId = quartoBusca.QuartoId
                 });
-                quartoBusca.SituacaoId = 3;
+                quartoBusca.SituacaoId = (int)Quarto.SituacaoEnum.Reservado;
 
                 context.SaveChanges();
                 return true;
@@ -35,7 +47,7 @@ namespace HMS_Techer.Servicos.Reserva
                 return false;
 
         }
-        public static void MostrarUltimaReserva()
+        public Modelos.ReservaRealizadaModel UltimaReserva()
         {
             var context = new HmsTecherContext();
             var reserva = context.Reserva
@@ -67,10 +79,10 @@ namespace HMS_Techer.Servicos.Reserva
                 }
             };
             //Return Model
-            Console.WriteLine(reservaModelo);
+            return reservaModelo;
         }
 
-        public static bool FazerCheckIn(int reservaId, string hospedeCpf)
+        public bool FazerCheckIn(int reservaId, string hospedeCpf)
         {
             var context = new HmsTecherContext();
             var hospede = context.Cliente.Where(a => a.Cpf == hospedeCpf).FirstOrDefault();
@@ -83,14 +95,14 @@ namespace HMS_Techer.Servicos.Reserva
             var quarto = context.Quarto.Where(q => q.QuartoId == reserva.QuartoId).FirstOrDefault();
             reserva.HospedesJson = hospedeCpf + "/" + string.Empty;
             reserva.CheckIn = DateTime.Now;
-            quarto.SituacaoId = 2;
+            quarto.SituacaoId = (int)Quarto.SituacaoEnum.Ocupado;
             context.SaveChanges();
 
             return true;
-
         }
+
         //Repensar esse metodo 
-        public static bool FazerCheckIn(int reservaId, string hospedeCpf1, string hospedeCpf2)
+        public bool FazerCheckIn(int reservaId, string hospedeCpf1, string hospedeCpf2)
         {
             var context = new HmsTecherContext();
             var hospede = context.Cliente.Where(a => a.Cpf == hospedeCpf1).FirstOrDefault();
@@ -104,13 +116,13 @@ namespace HMS_Techer.Servicos.Reserva
 
             reserva.HospedesJson = hospedeCpf1 + "/" + hospedeCpf2;
             reserva.CheckIn = DateTime.Now;
-            quarto.SituacaoId = 2;
+            quarto.SituacaoId = (int)Quarto.SituacaoEnum.Ocupado;
             context.SaveChanges();
 
             return true;
         }
 
-        public static Modelos.ReservaFinalModel FazerCheckOut(int reservaId, double consumoETaxas)
+        public Modelos.ReservaFinalModel FazerCheckOut(int reservaId, double consumoETaxas)
         {
             var context = new HmsTecherContext();
             //INstanciar o quarto situação e tipo na reserva via query
@@ -122,17 +134,17 @@ namespace HMS_Techer.Servicos.Reserva
             reserva.ValorDiarias = diasHospedagem * quarto.Tipo.Valor;
             reserva.TaxasConsumo = consumoETaxas;
             reserva.ValorFinal = reserva.ValorDiarias + reserva.TaxasConsumo;
-            quarto.SituacaoId = 4;
+            quarto.SituacaoId = (int)Quarto.SituacaoEnum.Manutencao;
 
             context.SaveChanges();
 
             List<Cliente.Modelos.ClienteFormularioModel> hospedes = new List<Cliente.Modelos.ClienteFormularioModel>();
             string[] cpfHospedes = reserva.HospedesJson.Split('/');
 
-            hospedes.Add(Cliente.ClienteService.BuscarClienteCompleto(cpfHospedes[0]));
+            hospedes.Add(_clienteService.BuscarClienteCompleto(cpfHospedes[0]));
 
             if(!String.IsNullOrEmpty(cpfHospedes[1]))
-                hospedes.Add(Cliente.ClienteService.BuscarClienteCompleto(cpfHospedes[1]));
+                hospedes.Add(_clienteService.BuscarClienteCompleto(cpfHospedes[1]));
 
             var reservaModel = new Modelos.ReservaFinalModel
             {
@@ -140,9 +152,9 @@ namespace HMS_Techer.Servicos.Reserva
                 DataCriacao = reserva.DataCriacao,
                 DataCheckIn = reserva.CheckIn.Value,
                 DataCheckOut = reserva.CheckOut.Value,
-                Cliente = Cliente.ClienteService.BuscarClienteCompleto(reserva.CpfReserva),
+                Cliente = _clienteService.BuscarClienteCompleto(reserva.CpfReserva),
                 Hospedes = hospedes,
-                Quarto = Quarto.QuartoService.BuscarQuarto(reserva.QuartoId),
+                Quarto = _quartoService.BuscarQuarto(reserva.QuartoId),
                 ValorDiarias = reserva.ValorDiarias.Value,
                 TaxasConsumo = reserva.TaxasConsumo.Value,
                 ValorFinal = reserva.ValorFinal.Value
@@ -151,7 +163,7 @@ namespace HMS_Techer.Servicos.Reserva
 
         }
 
-        public static bool ReservaValidaOut(int reservaId)
+        public bool ReservaValidaOut(int reservaId)
         {
             var context = new HmsTecherContext();
             var reserva = context.Reserva.Where(a => a.ReservaId == reservaId).FirstOrDefault();
@@ -166,7 +178,7 @@ namespace HMS_Techer.Servicos.Reserva
                 Console.ReadLine();
                 return false;
             }
-            if (quarto.SituacaoId != 2)
+            if (quarto.SituacaoId != (int)Quarto.SituacaoEnum.Ocupado)
             {
                 Console.WriteLine("\t\t Não foi efetuado Check Out, Não foi realizado check in para essa reserva");
 
@@ -177,7 +189,7 @@ namespace HMS_Techer.Servicos.Reserva
 
             return true;
         }
-        public static bool ReservaValidaIn(int reservaId)
+        public bool ReservaValidaIn(int reservaId)
         {
             var context = new HmsTecherContext();
             var reserva = context.Reserva.Where(a => a.ReservaId == reservaId).FirstOrDefault();
@@ -187,7 +199,7 @@ namespace HMS_Techer.Servicos.Reserva
 
             return true;
         }
-        public static QuartoModel QuartoDaReserva(int reservaId)
+        public QuartoModel QuartoDaReserva(int reservaId)
         {
             var context = new HmsTecherContext();
 
