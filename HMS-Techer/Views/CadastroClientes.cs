@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using HMS_Techer.Servicos.Cliente;
 
 namespace HMS_Techer.Views
 {
     class CadastroClientes 
     {
-        public static int Run()
+        //private readonly ClienteService _clienteService;
+        public static Telas Run(ClienteService clienteService)
         {
             Console.Clear();
             Tela.Header();
@@ -45,15 +45,15 @@ namespace HMS_Techer.Views
                 TelefoneCelular = telefoneCadastro
             };
 
-            if (!novoCadastro.Validar())
+            if (!clienteService.Validar(novoCadastro))
             {
                 Console.WriteLine("Pressione qualquer tecla para continuar...");
                 Console.ReadLine();
-                return (int)Views.Telas.MenuPrincipal;
+                return Telas.MenuPrincipal;
             }
 
 
-            Servicos.Cliente.ClienteService.CadastrarCliente(novoCadastro);
+            clienteService.CadastrarCliente(novoCadastro);
 
             Console.WriteLine();
             ConsolePrint.Print("\t\t     CADASTRO REALIZADO COM SUCESSO          ", ConsoleColor.Green, ConsoleColor.Gray);
@@ -62,7 +62,7 @@ namespace HMS_Techer.Views
             Console.WriteLine();
 
             Console.ReadLine();
-            return (int)Views.Telas.MenuPrincipal;
+            return Telas.MenuPrincipal;
         }
     }
 }

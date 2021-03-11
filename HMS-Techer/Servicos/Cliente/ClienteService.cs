@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using HMS_Techer.Servicos.Cliente.Modelos;
-using HMS_Techer.Entidades;
+using HMS_Techer.Exceptions;
 using HMS_Techer.Dados;
 using System.Linq;
 
@@ -23,8 +23,7 @@ namespace HMS_Techer.Servicos.Cliente
         public void CadastrarCliente(ClienteFormularioModel clienteFormularioModel)
         {
             //Sem estatico construtor da classe faz a referencia do contexto
-            var context = new HmsTecherContext();
-            context.Cliente.Add(new Entidades.Cliente
+            _context.Cliente.Add(new Entidades.Cliente
             {
                 Cpf = clienteFormularioModel.Cpf,
                 NomeCompleto = clienteFormularioModel.NomeCompleto,
@@ -34,12 +33,11 @@ namespace HMS_Techer.Servicos.Cliente
                 DataCriacao = DateTime.Now
             }
             );
-            context.SaveChanges();
+            _context.SaveChanges();
         }
         public List<ClienteModel> ListarTodosOsClientes()
         {
-            var context = new HmsTecherContext();
-            var clientes = context.Cliente
+            var clientes = _context.Cliente
                 .AsQueryable()
                 .OrderBy(c => c.DataCriacao)
                 .Select(c => new ClienteModel
@@ -55,8 +53,7 @@ namespace HMS_Techer.Servicos.Cliente
         //Validação no service
         public ClienteFormularioModel BuscarClienteCompleto(string cpf)
         {
-            var context = new HmsTecherContext();
-            var clienteBusca = context.Cliente
+            var clienteBusca = _context.Cliente
                 .Where(c => c.Cpf == cpf)
                 .Select(c => new ClienteFormularioModel
                 {
@@ -74,8 +71,7 @@ namespace HMS_Techer.Servicos.Cliente
         }
         public ClienteModel BuscarCliente(string cpf)
         {
-            var context = new HmsTecherContext();
-            var clienteBusca = context.Cliente
+            var clienteBusca = _context.Cliente
                 .Where(c => c.Cpf == cpf)
                 .Select(c => new ClienteModel
                 {
@@ -90,6 +86,38 @@ namespace HMS_Techer.Servicos.Cliente
                 return null;
 
             return clienteBusca;
+        }
+
+        public bool Validar(ClienteFormularioModel cliente)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(cliente.Cpf) || cliente.Cpf.Length != 11)
+                    throw new MyException("CPF Invalido ou não preenchido!");
+
+                if (string.IsNullOrEmpty(cliente.NomeCompleto))
+                    throw new MyException("Nome não preenchido");
+
+                if (string.IsNullOrEmpty(cliente.DataNascimento.ToString()) || cliente.DataNascimento > DateTime.Now || (DateTime.Now.Year - cliente.DataNascimento.Year) < 18)
+                    throw new MyException("Data de nascimento Invalida ou não preenchida");
+
+                if (string.IsNullOrEmpty(cliente.Email))
+                    throw new MyException("Email não preenchido");
+
+                if (string.IsNullOrEmpty(cliente.TelefoneCelular) || cliente.TelefoneCelular.Length != 11)
+                    throw new MyException("Telefone Invalido ou não preenchido!");
+
+                var cpfBusca = BuscarCliente(cliente.Cpf);
+
+                if (cpfBusca != null)
+                    throw new MyException("CPF ja cadastrado !");
+            }
+            catch (MyException e)
+            {
+                Console.WriteLine("Erro no cadastro: " + e.Message);
+                return false;
+            }
+            return true;
         }
     }
 }

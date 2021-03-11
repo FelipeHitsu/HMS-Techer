@@ -15,7 +15,7 @@ namespace HMS_Techer.Dados
         public virtual DbSet<TipoQuarto> TipoQuarto { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Dados.DadosLocais.DbDefault);
+            optionsBuilder.UseSqlServer(DadosLocais.DbTecher);
         }
     }
 }

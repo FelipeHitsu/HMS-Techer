@@ -1,13 +1,13 @@
 CREATE TABLE TipoQuarto  (
    TipoQuartoId int NOT NULL,
-   Descricao nvarchar(255) NOT NULL,
+   Descricao varchar(255) NOT NULL,
    Valor  float NOT NULL,
    PRIMARY KEY (TipoQuartoId)
 );
 
 CREATE TABLE SituacaoQuarto  (
    SituacaoQuartoId int NOT NULL,
-   Descricao nvarchar(255) NOT NULL,
+   Descricao varchar(255) NOT NULL,
    PRIMARY KEY (SituacaoQuartoId)
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE Quarto  (
 CREATE TABLE Cliente  (
    Cpf varchar(11) NOT NULL,
    NomeCompleto varchar(50) NOT NULL,
-   DataNascimento datetime NOT NULL,
+   DataNascimento date NOT NULL,
    Email varchar(50) NOT NULL,
    TelefoneCelular varchar(11) NOT NULL,
    DataCriacao datetime NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE Reserva  (
    CheckIn datetime NULL,
    CheckOut datetime NULL,
    CpfReserva varchar(11) NOT NULL,
-   HospedesJson JSON NULL,
+   HospedesJson varchar(23) NULL,
    QuartoId int NOT NULL,
    ValorDiarias float NULL,
    TaxasConsumo float NULL,
@@ -51,3 +51,11 @@ ALTER TABLE Reserva ADD CONSTRAINT FK_Reserva_Cliente FOREIGN KEY (CpfReserva) R
 
 ALTER TABLE Reserva ADD CONSTRAINT FK_Reserva_Quarto FOREIGN KEY (QuartoId) REFERENCES Quarto (QuartoId);
 
+DECLARE @i int = 1
+
+WHILE @i <= 20
+BEGIN
+	INSERT INTO dbo.Quarto(QuartoId,TipoId,SituacaoId) 
+	VALUES (@i,1,1);
+    SET @i = @i + 1
+END

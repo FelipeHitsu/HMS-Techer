@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HMS_Techer.Views
 {
     class Inicio 
     {
-        public static int Run()
+        public static Telas Run()
         {
 
             Console.Clear();
@@ -18,7 +16,7 @@ namespace HMS_Techer.Views
             Dados.DadosLocais.NomeFuncionario = Console.ReadLine();
             
 
-            return (int)Views.Telas.MenuPrincipal;
+            return Telas.MenuPrincipal;
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using HMS_Techer.Servicos.Reserva;
+using HMS_Techer.Servicos.Quarto;
 
 namespace HMS_Techer.Views
 {
     class CheckIn 
     {
-        public static int Run()
+        public static Telas Run(ReservaService reservaService)
         {
 
             Console.Clear();
@@ -27,40 +27,40 @@ namespace HMS_Techer.Views
 
             
 
-            if (!Servicos.Reserva.ReservaService.ReservaValidaIn(reservaId))
+            if (!reservaService.ReservaValidaIn(reservaId))
             {
                 Console.WriteLine("\t\t Reserva não encontrada");
                 Console.WriteLine("\t\t Check In não realizado, erro encontrado");
 
                 Console.Write("\t\t Pressiona qualquer tecla para continuar");
                 Console.ReadLine();
-                return (int)Views.Telas.CheckIn;
+                return Telas.CheckIn;
             }
             //Repensar esse metodo
-            var quartoReserva = Servicos.Reserva.ReservaService.QuartoDaReserva(reservaId);
+            var quartoReserva = reservaService.QuartoDaReserva(reservaId);
 
-            if (quartoReserva.Situacao.SituacaoQuartoId == 3 && quartoReserva.Tipo.TipoQuartoId == 1) // Quarto solteiro
+            if (quartoReserva.Situacao.SituacaoQuartoId == (int)SituacaoEnum.Reservado && quartoReserva.Tipo.TipoQuartoId == (int)TipoEnum.Solteiro) // Quarto solteiro
             {
               
                 Console.Write("\t\t Insira o Número CPF do Hóspede (11 Digitos sem pontuação): ");
                 string cpfHospede = Console.ReadLine();
 
-                if(!Servicos.Reserva.ReservaService.FazerCheckIn(reservaId, cpfHospede))
+                if(!reservaService.FazerCheckIn(reservaId, cpfHospede))
                 {
                     Console.WriteLine("\t\t Check In não realizado, erro encontrado");
 
                     Console.Write("\t\t Pressiona qualquer tecla para continuar");
                     Console.ReadLine();
-                    return (int)Views.Telas.CheckIn;
+                    return Telas.CheckIn;
                 }
 
                 Console.WriteLine("\t\t Check in Realizado na Reserva " + reservaId + " na data de " + DateTime.Now.ToString("f"));
 
                 Console.Write("\t\t Pressiona qualquer tecla para continuar");
                 Console.ReadLine();
-                return (int)Views.Telas.MenuPrincipal;
+                return Telas.MenuPrincipal;
             }
-            else if(quartoReserva.Situacao.SituacaoQuartoId == 3) // Quartos casal e duplo 
+            else if(quartoReserva.Situacao.SituacaoQuartoId == (int)SituacaoEnum.Reservado) // Quartos casal e duplo 
             {
                 Console.Write("\t\t  Insira o Número de hóspedes (1 / 2): ");
                 int numeroDeHospedes = int.Parse(Console.ReadLine());
@@ -71,20 +71,20 @@ namespace HMS_Techer.Views
                     Console.Write("\t\t Insira o Número CPF do Hóspede (11 Digitos sem pontuação): ");
                     string cpfHospede = Console.ReadLine();
 
-                    if (!Servicos.Reserva.ReservaService.FazerCheckIn(reservaId, cpfHospede))
+                    if (!reservaService.FazerCheckIn(reservaId, cpfHospede))
                     {
                         Console.WriteLine("\t\t Check In não realizado, erro encontrado");
 
                         Console.Write("\t\t Pressiona qualquer tecla para continuar");
                         Console.ReadLine();
-                        return (int)Views.Telas.CheckIn;
+                        return Telas.CheckIn;
                     }
 
                     Console.WriteLine("\t\t Check in Realizado na Reserva " + reservaId + " na data de " + DateTime.Now.ToString("f"));
 
                     Console.Write("\t\t Pressiona qualquer tecla para continuar");
                     Console.ReadLine();
-                    return (int)Views.Telas.MenuPrincipal;
+                    return Telas.MenuPrincipal;
                 }
 
                 if(numeroDeHospedes == 2)
@@ -96,20 +96,20 @@ namespace HMS_Techer.Views
                     Console.Write("\t\t Insira o Número CPF do Hóspede 2 (11 Digitos sem pontuação): ");
                     string cpfHospede2 = Console.ReadLine();
 
-                    if (!Servicos.Reserva.ReservaService.FazerCheckIn(reservaId, cpfHospede1,cpfHospede2))
+                    if (reservaService.FazerCheckIn(reservaId, cpfHospede1,cpfHospede2))
                     {
                         Console.WriteLine("\t\t Check In não realizado, quarto indisponivel ou cliente não encontrado");
 
                         Console.Write("\t\t Pressiona qualquer tecla para continuar");
                         Console.ReadLine();
-                        return (int)Views.Telas.CheckIn;
+                        return Telas.CheckIn;
                     }
 
                     Console.WriteLine("\t\t Check in Realizado na Reserva " + reservaId + " na data de " + DateTime.Now.ToString("f"));
 
                     Console.Write("\t\t Pressiona qualquer tecla para continuar");
                     Console.ReadLine();
-                    return (int)Views.Telas.MenuPrincipal;
+                    return Telas.MenuPrincipal;
                 }
 
                 else
@@ -117,13 +117,13 @@ namespace HMS_Techer.Views
                     Console.Write("\t\t Quantidade Invalida");
                     Console.Write("\t\t Pressiona qualquer tecla para continuar");
                     Console.ReadLine();
-                    return (int)Views.Telas.CheckIn;
+                    return Telas.CheckIn;
                 }
             }
 
             Console.Write("\t\t Pressiona qualquer tecla para continuar");
             Console.ReadLine();
-            return (int)Views.Telas.MenuPrincipal;
+            return Telas.MenuPrincipal;
         }
     }
 }

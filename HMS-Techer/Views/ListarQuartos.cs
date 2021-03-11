@@ -1,13 +1,12 @@
 ﻿using HMS_Techer.Servicos.Quarto;
 using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace HMS_Techer.Views
 {
     class ListarQuartos 
     {
-        public static int Run()
+        public static Telas Run(QuartoService quartoService)
         {
             Console.Clear();
             Tela.Header();
@@ -53,21 +52,21 @@ namespace HMS_Techer.Views
             {
                 Console.Clear();
                 Tela.Header();
-                var quartos = QuartoService.ListarQuartosPorSituacao(2);
+                var quartos = quartoService.ListarQuartosPorSituacao(SituacaoEnum.Ocupado);
                 foreach(QuartoModel quarto in quartos)
                     Console.WriteLine(quarto);
 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
                 Tela.Footer(Console.CursorLeft, Console.CursorTop);
                 Console.ReadLine();
-                return (int)Views.Telas.MenuPrincipal;
+                return Telas.MenuPrincipal;
             }
             if (escolha == 'l' || escolha == 'L')
             {
                 Console.Clear();
                 Tela.Header();
                 
-                var quartos = QuartoService.ListarQuartosPorSituacao(1);
+                var quartos = quartoService.ListarQuartosPorSituacao(SituacaoEnum.Livre);
                 foreach (QuartoModel quarto in quartos)
                     Console.WriteLine(quarto);
 
@@ -75,35 +74,35 @@ namespace HMS_Techer.Views
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
                 Tela.Footer(Console.CursorLeft,Console.CursorTop);
                 Console.ReadLine();
-                return (int)Views.Telas.MenuPrincipal;
+                return Telas.MenuPrincipal;
             }
             if (escolha == 'r' || escolha == 'R')
             {
                 Console.Clear();
                 Tela.Header();
                 
-                var quartos = QuartoService.ListarQuartosPorSituacao(3);
+                var quartos = quartoService.ListarQuartosPorSituacao(SituacaoEnum.Reservado);
                 foreach (QuartoModel quarto in quartos)
                     Console.WriteLine(quarto);
 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
                 Tela.Footer(Console.CursorLeft, Console.CursorTop);
                 Console.ReadLine();
-                return (int)Views.Telas.MenuPrincipal;
+                return Telas.MenuPrincipal;
             }
             if (escolha == 'm' || escolha == 'M')
             {
                 Console.Clear();
                 Tela.Header();
                 
-                var quartos = QuartoService.ListarQuartosPorSituacao(4);
+                var quartos = quartoService.ListarQuartosPorSituacao(SituacaoEnum.Manutencao);
                 foreach (QuartoModel quarto in quartos)
                     Console.WriteLine(quarto);
 
                 Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
                 Tela.Footer(Console.CursorLeft, Console.CursorTop);
                 Console.ReadLine();
-                return (int)Views.Telas.MenuPrincipal;
+                return Telas.MenuPrincipal;
             }
             else
             {
@@ -117,7 +116,7 @@ namespace HMS_Techer.Views
 
             Console.WriteLine("\t\t     Pressione qualquer tecla para retornar ao menu principal");
             Console.ReadLine();
-            return (int)Views.Telas.MenuPrincipal;
+            return Telas.MenuPrincipal;
         }
     }
 }

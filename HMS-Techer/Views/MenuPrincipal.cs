@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+using HMS_Techer.Servicos.Quarto;
 
 namespace HMS_Techer.Views
 {
     class MenuPrincipal
     {
-        public static int Run()
+        public static Telas Run(QuartoService quartoService)
         {
             Console.Clear();
             Tela.Header();
@@ -51,27 +49,27 @@ namespace HMS_Techer.Views
             Console.ForegroundColor = originalForeground;
 
             if (escolha == 1)
-                return (int)Views.Telas.CadastroClientes;
+                return Telas.CadastroClientes;
             if (escolha == 2)
-                return (int)Views.Telas.BuscarCliente;
+                return Telas.BuscarCliente;
             if (escolha == 3)
-                return (int)Views.Telas.ListarQuartos;
+                return Telas.ListarQuartos;
             if (escolha == 4)
-                return (int)Views.Telas.RealizarReserva;
+                return Telas.RealizarReserva;
             if (escolha == 5)
-                return (int)Views.Telas.CheckIn;
+                return Telas.CheckIn;
             if (escolha == 6)
-                return (int)Views.Telas.CheckOut;
+                return Telas.CheckOut;
             if (escolha == 7)
-                return (int)Views.Telas.Finalizar;
+                return Telas.Finalizar;
             if(escolha == 8)
             {
-                Servicos.Quarto.QuartoService.ResetQuartosEmManutencao();
-                return (int)Views.Telas.MenuPrincipal;
+                quartoService.ResetQuartosEmManutencao();
+                return Telas.MenuPrincipal;
             }
 
             else
-                return (int)Views.Telas.MenuPrincipal;
+                return Telas.MenuPrincipal;
 
         }
     }

@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using HMS_Techer.Servicos.Cliente;
+
 
 namespace HMS_Techer.Views
 {
     class BuscarCliente 
     {
-        public static int Run()
+        public static Telas Run(ClienteService clienteService)
         {
             Console.Clear();
             Tela.Header();
@@ -31,10 +31,10 @@ namespace HMS_Techer.Views
                 Console.WriteLine();
                 Console.WriteLine("\t\t Pressione qualquer tecla para retornar ao menu...");
                 Console.ReadLine();
-                return (int)Views.Telas.BuscarCliente;
+                return Telas.BuscarCliente;
             }
 
-            var resultadoBusca = Servicos.Cliente.ClienteService.BuscarCliente(cpf);
+            var resultadoBusca = clienteService.BuscarCliente(cpf);
             
             if(resultadoBusca != null)
             {
@@ -53,7 +53,7 @@ namespace HMS_Techer.Views
             Console.WriteLine();
             Console.WriteLine("\t\t Pressione qualquer tecla para retornar ao menu...");
             Console.ReadLine();
-            return (int)Views.Telas.MenuPrincipal;
+            return Telas.MenuPrincipal;
         }
     }
 }

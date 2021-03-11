@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using HMS_Techer.Servicos.Reserva;
 
 namespace HMS_Techer.Views
 {
     class CheckOut 
     {
-        public static int Run()
+        public static Telas Run(ReservaService reservaService)
         {
 
             Console.Clear();
@@ -25,15 +24,15 @@ namespace HMS_Techer.Views
             Console.Write("\t\t Insira o Número da Reserva: ");
             int numeroReserva = int.Parse(Console.ReadLine());
 
-            if (!Servicos.Reserva.ReservaService.ReservaValidaOut(numeroReserva))
+            if (!reservaService.ReservaValidaOut(numeroReserva))
             {
-                return (int)Views.Telas.MenuPrincipal;
+                return Telas.MenuPrincipal;
             }
 
             Console.Write("\t\t Insira o valor de taxas e consumo: ");
             double taxasConsumo = double.Parse(Console.ReadLine());
 
-            var reservaCheckOut = Servicos.Reserva.ReservaService.FazerCheckOut(numeroReserva, taxasConsumo);
+            var reservaCheckOut = reservaService.FazerCheckOut(numeroReserva, taxasConsumo);
 
             Console.Clear();
             Tela.Header();
@@ -48,7 +47,7 @@ namespace HMS_Techer.Views
             Tela.Footer(Console.CursorLeft, Console.CursorTop);
             Console.ReadLine();
 
-            return (int)Views.Telas.MenuPrincipal;
+            return Telas.MenuPrincipal;
         }
     }
 }

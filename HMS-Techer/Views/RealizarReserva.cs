@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using HMS_Techer.Servicos.Reserva.Modelos;
+using HMS_Techer.Servicos.Reserva;
 
 namespace HMS_Techer.Views
 {
     class RealizarReserva 
     {
-        public static int Run()
+        public static Telas Run(ReservaService reservaService)
         {
 
             Console.Clear();
@@ -22,7 +22,7 @@ namespace HMS_Techer.Views
             ConsolePrint.Print("\t\t                                             ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
 
-            var formularioReserva = new Servicos.Reserva.Modelos.ReservaFormularioModel();
+            var formularioReserva = new ReservaFormularioModel();
 
             Console.Write("\t\t Insira o Número do Quarto a reservar: ");
             int quartoSelecionado = int.Parse(Console.ReadLine());
@@ -34,23 +34,24 @@ namespace HMS_Techer.Views
             formularioReserva.ClienteCpf = cpfCadastro;
 
 
-            if (Servicos.Reserva.ReservaService.CriarNovaReserva(formularioReserva))
+            if (reservaService.CriarNovaReserva(formularioReserva))
             {
                 Console.WriteLine();
                 ConsolePrint.Print("\t\t              RESERVA REALIZADA !          ", ConsoleColor.Green, ConsoleColor.DarkGray);
                 Console.WriteLine();
 
-                Servicos.Reserva.ReservaService.MostrarUltimaReserva();
+                var ultimaReserva = reservaService.UltimaReserva();
 
+                Console.WriteLine(ultimaReserva);
                 Console.ReadLine();
-                return (int)Views.Telas.MenuPrincipal;
+                return Telas.MenuPrincipal;
             }
 
             Console.WriteLine();
             ConsolePrint.Print("\t\t              QUARTO INDISPONIVEL OU CLIENTE NÃO CADASTRADO !          ", ConsoleColor.Red, ConsoleColor.DarkGray);
             Console.WriteLine();
             Console.ReadLine();
-            return (int)Views.Telas.MenuPrincipal;
+            return Telas.MenuPrincipal;
         }
     }
 }

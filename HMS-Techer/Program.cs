@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Threading;
+using HMS_Techer.Dados;
+using HMS_Techer.Views;
+using HMS_Techer.Servicos.Quarto;
+using HMS_Techer.Servicos.Cliente;
+using HMS_Techer.Servicos.Reserva;
 
 namespace HMS_Techer
 {
@@ -8,47 +13,53 @@ namespace HMS_Techer
 
         static void Main(string[] args)
         {
-            Views.Tela.Carregar();
+            Tela.Carregar();
             bool aplicacaoFinalizada = false;
-            int estadoMenu = -1;
+            Telas estadoTela = Telas.Inicio;
+            //int estadoMenu = -1;
             //inicialização e criação de contextos
+            HmsTecherContext context = new HmsTecherContext();
+            QuartoService quartoService = new QuartoService(context);
+            ClienteService clienteService = new ClienteService(context);
+            ReservaService reservaService = new ReservaService(context,clienteService,quartoService);
+
             while (!aplicacaoFinalizada)
             {
-                switch (estadoMenu)
+                switch (estadoTela)
                 {
-                    case (int)Views.Telas.Inicio: //Não precisa desse cast do int
-                        estadoMenu = Views.Inicio.Run();
+                    case Telas.Inicio: //Não precisa desse cast do int
+                        estadoTela = Inicio.Run();
                         break;
 
-                    case (int)Views.Telas.MenuPrincipal:
-                        estadoMenu = Views.MenuPrincipal.Run();
+                    case Telas.MenuPrincipal:
+                        estadoTela = MenuPrincipal.Run(quartoService);
                         break;
 
-                    case (int)Views.Telas.CadastroClientes:
-                        estadoMenu = Views.CadastroClientes.Run();
+                    case Telas.CadastroClientes:
+                        estadoTela = CadastroClientes.Run(clienteService);
                         break;
 
-                    case (int)Views.Telas.BuscarCliente:
-                        estadoMenu = Views.BuscarCliente.Run();
+                    case Telas.BuscarCliente:
+                        estadoTela = BuscarCliente.Run(clienteService);
                         break;
 
-                    case (int)Views.Telas.ListarQuartos:
-                        estadoMenu = Views.ListarQuartos.Run();
+                    case Telas.ListarQuartos:
+                        estadoTela = ListarQuartos.Run(quartoService);
                         break;
 
-                    case (int)Views.Telas.RealizarReserva:
-                        estadoMenu = Views.RealizarReserva.Run();
+                    case Telas.RealizarReserva:
+                        estadoTela = RealizarReserva.Run(reservaService);
                         break;
 
-                    case (int)Views.Telas.CheckIn:
-                        estadoMenu = Views.CheckIn.Run();
+                    case Telas.CheckIn:
+                        estadoTela = CheckIn.Run(reservaService);
                         break;
 
-                    case (int)Views.Telas.CheckOut:
-                        estadoMenu = Views.CheckOut.Run();
+                    case Telas.CheckOut:
+                        estadoTela = CheckOut.Run(reservaService);
                         break;
 
-                    case (int)Views.Telas.Finalizar:
+                    case Telas.Finalizar:
                         aplicacaoFinalizada = true;
                         break;
 
@@ -57,13 +68,13 @@ namespace HMS_Techer
             }
 
             Console.Clear();
-            Views.Tela.Header();
+            Tela.Header();
             Console.WriteLine();
-            Views.ConsolePrint.Print("\t\t             FINALIZANDO O SISTEMA            ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
+            ConsolePrint.Print("\t\t             FINALIZANDO O SISTEMA            ", ConsoleColor.DarkCyan, ConsoleColor.Gray);
             Console.WriteLine();
-            Views.Tela.Footer();
+            Tela.Footer();
             Thread.Sleep(2000);
-            System.Environment.Exit(0);
+            Environment.Exit(0);
            
         }
 

@@ -20,8 +20,8 @@ namespace HMS_Techer.Servicos.Quarto
 
         public QuartoModel BuscarQuarto(int quartoId)
         {
-            var context = new HmsTecherContext();
-            var quarto = context.Quarto.Where(q => q.QuartoId == quartoId)
+            
+            var quarto = _context.Quarto.Where(q => q.QuartoId == quartoId)
                 .Select(q => new QuartoModel
                 {
                     QuartoId = q.QuartoId,
@@ -31,10 +31,10 @@ namespace HMS_Techer.Servicos.Quarto
             return quarto;
         }
         //Situacao quarto id - de int para ENUM
-        public List<QuartoModel> ListarQuartosPorSituacao(Quarto.SituacaoEnum situacao)
+        public List<QuartoModel> ListarQuartosPorSituacao(SituacaoEnum situacao)
         {
-            var context = new HmsTecherContext();
-            var quartos = context.Quarto
+            
+            var quartos = _context.Quarto
                 .AsQueryable()
                 .Include(c => c.Situacao)
                 .Include(c => c.Tipo)
@@ -50,21 +50,21 @@ namespace HMS_Techer.Servicos.Quarto
             return quartos;
         }
 
-        public void AlterarSituacao(int quartoId, Quarto.SituacaoEnum situacao)
+        public void AlterarSituacao(int quartoId, SituacaoEnum situacao)
         {
-            var context = new HmsTecherContext();
-            var quarto = context.Quarto.Where(q => q.QuartoId == quartoId).FirstOrDefault();
+            
+            var quarto = _context.Quarto.Where(q => q.QuartoId == quartoId).FirstOrDefault();
             quarto.SituacaoId = (int)situacao;
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void ResetQuartosEmManutencao()
         {
-            var context = new HmsTecherContext();
-            var quartosEmManutencao = context.Quarto.Where(q => q.SituacaoId == (int)SituacaoEnum.Manutencao).ToList();
+            
+            var quartosEmManutencao = _context.Quarto.Where(q => q.SituacaoId == (int)SituacaoEnum.Manutencao).ToList();
             foreach (Entidades.Quarto q in quartosEmManutencao)
                 q.SituacaoId = (int)SituacaoEnum.Livre;
-            context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }
